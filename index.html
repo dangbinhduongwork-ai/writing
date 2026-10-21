@@ -1,0 +1,1908 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Không Gian Ôn Luyện Aptis ESOL Writing B1 - B.Duong is me</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f8fafc;
+      color: #0f172a;
+    }
+    .custom-scroll::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    .custom-scroll::-webkit-scrollbar-track {
+      background: #f1f5f9;
+      border-radius: 4px;
+    }
+    .custom-scroll::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 4px;
+    }
+    .custom-scroll::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col bg-slate-50 text-slate-900">
+
+  <!-- Top Header -->
+  <header class="bg-indigo-950 text-white border-b border-indigo-900 sticky top-0 z-30 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3.5 flex flex-wrap items-center justify-between gap-3">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-indigo-600 flex items-center justify-center font-bold text-lg shadow-inner">
+          B1
+        </div>
+        <div>
+          <h1 class="text-base sm:text-lg font-bold tracking-tight flex items-center gap-2">
+            Aptis ESOL Writing B1 Studio - B.Duong is me
+            <span class="hidden sm:inline-block text-xs font-medium bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 px-2 py-0.5 rounded-full">
+              Chuẩn British Council (Mục tiêu ≥ 26/50)
+            </span>
+          </h1>
+          <p class="text-xs text-indigo-200">Ráp ý tưởng thành câu đúng ngữ pháp • Thuộc cụm từ đa năng • Thi thử 4 Part có chấm điểm</p>
+        </div>
+      </div>
+
+      <!-- Progress Summary Pill -->
+      <div class="flex items-center gap-2 sm:gap-3 text-xs">
+        <div class="bg-indigo-900/80 border border-indigo-800 px-3 py-1.5 rounded-lg flex items-center gap-2">
+          <span class="text-indigo-300">Cụm từ đã thuộc:</span>
+          <span id="headerMasteredCount" class="font-bold text-emerald-400">0/20</span>
+        </div>
+        <div class="bg-indigo-900/80 border border-indigo-800 px-3 py-1.5 rounded-lg flex items-center gap-2">
+          <span class="text-indigo-300">Quiz Ngữ pháp:</span>
+          <span id="headerQuizScore" class="font-bold text-amber-300">0/10</span>
+        </div>
+        <div class="bg-indigo-900/80 border border-indigo-800 px-3 py-1.5 rounded-lg flex items-center gap-2">
+          <span class="text-indigo-300">Câu đã lưu:</span>
+          <span id="headerSavedCount" class="font-bold text-sky-300">0</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Navigation Tabs -->
+    <div class="bg-indigo-900/60 border-t border-indigo-800/80">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 flex overflow-x-auto no-scrollbar gap-1 sm:gap-2 py-1.5">
+        <button id="tabBtnBuilder" type="button" class="nav-tab-btn px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold transition flex items-center gap-2 bg-white text-indigo-950 shadow-sm whitespace-nowrap">
+          <span>🧩 1. Xưởng Ráp Câu Từ Ý Tưởng</span>
+        </button>
+        <button id="tabBtnVocab" type="button" class="nav-tab-btn px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold transition flex items-center gap-2 text-indigo-100 hover:bg-indigo-800/60 whitespace-nowrap">
+          <span>📚 2. Kho Từ Vựng & Trắc Nghiệm Ngữ Pháp</span>
+        </button>
+        <button id="tabBtnSimulator" type="button" class="nav-tab-btn px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold transition flex items-center gap-2 text-indigo-100 hover:bg-indigo-800/60 whitespace-nowrap">
+          <span>✍️ 3. Phòng Luyện Viết 4 Part & Tự Chấm B1</span>
+        </button>
+        <button id="tabBtnNotebook" type="button" class="nav-tab-btn px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold transition flex items-center gap-2 text-indigo-100 hover:bg-indigo-800/60 whitespace-nowrap">
+          <span>📓 4. Sổ Tay Câu & Công Thức B1</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Toast notification -->
+  <div id="toastBanner" class="fixed bottom-5 right-5 z-50 hidden bg-slate-900 text-white text-xs sm:text-sm px-4 py-3 rounded-xl shadow-lg border border-slate-700 flex items-center gap-2.5">
+    <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+    <span id="toastText">Đã lưu!</span>
+  </div>
+
+  <!-- Main Workspace Container -->
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 py-6">
+
+    <!-- ==================== TAB 1: IDEA-TO-SENTENCE BUILDER ==================== -->
+    <section id="viewBuilder" class="space-y-6">
+      <!-- Intro Banner -->
+      <div class="bg-gradient-to-r from-indigo-600 to-blue-600 rounded-2xl p-5 text-white shadow-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+        <div class="space-y-1">
+          <div class="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider bg-white/15 px-2.5 py-0.5 rounded-full">
+            Giải pháp cho người "Có ý tưởng nhưng không biết viết sao cho đúng"
+          </div>
+          <h2 class="text-lg sm:text-xl font-bold">Xưởng Ráp Câu Chuẩn B1 (3 Bước Không Bao Giờ Sai Ngữ Pháp)</h2>
+          <p class="text-xs sm:text-sm text-indigo-100 max-w-3xl">
+            Thay vì dịch từng chữ tiếng Việt sang tiếng Anh (rất dễ sai động từ và giới từ), hãy chọn <strong>Tình huống câu hỏi</strong> bên dưới rồi ghép 3 mảnh: <strong>Khung Mở Đầu (S + V)</strong> + <strong>Cụm Từ Vựng Đa Năng</strong> + <strong>Từ Nối Mở Rộng Ý</strong>.
+          </p>
+        </div>
+        <button id="btnRandomIdea" type="button" class="shrink-0 bg-white text-indigo-700 hover:bg-indigo-50 font-semibold text-xs sm:text-sm px-4 py-2.5 rounded-xl shadow-sm transition">
+          🎲 Đổi Tình Huống Mẫu Khác
+        </button>
+      </div>
+
+      <!-- Scenario Selector -->
+      <div class="bg-white rounded-2xl border border-slate-200 p-4 sm:p-5 shadow-sm">
+        <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2.5">
+          Chọn nhóm ý tưởng bạn muốn diễn đạt trong bài thi:
+        </label>
+        <div id="scenarioButtonsContainer" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-2.5">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+
+      <!-- Vietnamese Idea Mistake vs Standard Comparison -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
+        <!-- Left 7 cols: Interactive 3-step Lego Builder -->
+        <div class="lg:col-span-7 bg-white rounded-2xl border border-slate-200 p-5 shadow-sm space-y-5">
+          <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+            <div>
+              <span class="text-xs font-semibold text-indigo-600 uppercase tracking-wider" id="builderPartBadge">Part 2 & Part 3 (Câu 1)</span>
+              <h3 class="text-base font-bold text-slate-900 mt-0.5" id="builderScenarioTitle">Nêu lý do tham gia Câu lạc bộ</h3>
+            </div>
+            <span class="text-xs bg-slate-100 text-slate-700 px-2.5 py-1 rounded-md font-medium">Click vào từng mảnh để lắp câu</span>
+          </div>
+
+          <!-- Step 1 -->
+          <div class="space-y-2">
+            <div class="flex items-center justify-between">
+              <label class="text-xs font-bold text-slate-700 flex items-center gap-1.5">
+                <span class="w-5 h-5 rounded-full bg-indigo-600 text-white inline-flex items-center justify-center text-[11px]">1</span>
+                Mảnh 1: Chọn Khung Ngữ Pháp Mở Đầu (Chủ ngữ + Động từ chuẩn)
+              </label>
+              <span class="text-[11px] text-slate-500">Quyết định 100% đúng thì & giới từ</span>
+            </div>
+            <div id="step1Options" class="grid grid-cols-1 sm:grid-cols-2 gap-2"></div>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="space-y-2">
+            <div class="flex items-center justify-between">
+              <label class="text-xs font-bold text-slate-700 flex items-center gap-1.5">
+                <span class="w-5 h-5 rounded-full bg-emerald-600 text-white inline-flex items-center justify-center text-[11px]">2</span>
+                Mảnh 2: Ghép Cụm Từ Vựng Đa Năng (Collocation ăn điểm B1)
+              </label>
+              <span class="text-[11px] text-slate-500">Ý chính bạn muốn nói</span>
+            </div>
+            <div id="step2Options" class="grid grid-cols-1 sm:grid-cols-2 gap-2"></div>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="space-y-2">
+            <div class="flex items-center justify-between">
+              <label class="text-xs font-bold text-slate-700 flex items-center gap-1.5">
+                <span class="w-5 h-5 rounded-full bg-amber-600 text-white inline-flex items-center justify-center text-[11px]">3</span>
+                Mảnh 3: Nối Thêm Câu Mở Rộng (Tăng điểm Cohesion / Liên kết)
+              </label>
+              <span class="text-[11px] text-slate-500">Giúp đạt 5/5 ở Part 2 & 4/5 ở Part 3</span>
+            </div>
+            <div id="step3Options" class="grid grid-cols-1 sm:grid-cols-2 gap-2"></div>
+          </div>
+        </div>
+
+        <!-- Right 5 cols: Live Assembled Output + Error Comparison -->
+        <div class="lg:col-span-5 flex flex-col gap-4">
+          <!-- Assembled Box -->
+          <div class="bg-white rounded-2xl border-2 border-indigo-600 p-5 shadow-sm space-y-4">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold uppercase tracking-wider text-indigo-700 bg-indigo-50 px-2.5 py-1 rounded-md">
+                ✨ Câu Tiếng Anh Hoàn Chỉnh Của Bạn
+              </span>
+              <span id="assembledWordCount" class="text-xs font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2.5 py-0.5 rounded-full">
+                24 từ
+              </span>
+            </div>
+
+            <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200 space-y-2">
+              <p id="assembledEnglishText" class="text-sm sm:text-base font-semibold text-slate-900 leading-relaxed"></p>
+              <p id="assembledVietnameseMeaning" class="text-xs text-slate-600 italic border-t border-slate-200/80 pt-2"></p>
+            </div>
+
+            <!-- Custom tweak box -->
+            <div>
+              <label for="customSentenceInput" class="block text-xs font-semibold text-slate-600 mb-1">
+                Tự chỉnh sửa lại theo ý riêng của bạn (hoặc giữ nguyên để lưu):
+              </label>
+              <textarea id="customSentenceInput" rows="2" class="w-full rounded-xl border border-slate-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"></textarea>
+            </div>
+
+            <div class="flex flex-wrap items-center gap-2 pt-1">
+              <button id="btnSaveSentence" type="button" class="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold text-xs sm:text-sm py-2.5 px-4 rounded-xl transition flex items-center justify-center gap-1.5">
+                <span>📌 Lưu Vào Sổ Tay Câu B1</span>
+              </button>
+              <button id="btnCopySentence" type="button" class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-xs sm:text-sm py-2.5 px-3.5 rounded-xl transition">
+                📋 Copy
+              </button>
+            </div>
+          </div>
+
+          <!-- Why Word-by-Word Fails Card -->
+          <div class="bg-amber-50/90 rounded-2xl border border-amber-200 p-4 space-y-3">
+            <h4 class="text-xs font-bold uppercase tracking-wider text-amber-900 flex items-center gap-1.5">
+              ⚠️ So sánh: Dịch Từng Chữ (Hay Sai) vs. Khung B1 Chuẩn
+            </h4>
+            <div class="space-y-2 text-xs">
+              <div class="bg-white/90 p-2.5 rounded-lg border border-rose-200">
+                <div class="font-bold text-rose-700">❌ Lỗi dịch từng chữ người Việt hay mắc:</div>
+                <p id="builderBadExample" class="text-slate-700 line-through mt-0.5"></p>
+                <p id="builderBadReason" class="text-[11px] text-rose-600 mt-1"></p>
+              </div>
+              <div class="bg-white/90 p-2.5 rounded-lg border border-emerald-200">
+                <div class="font-bold text-emerald-700">✅ Điểm cộng ngữ pháp trong câu bạn vừa ráp:</div>
+                <p id="builderGrammarPoint" class="text-slate-700 mt-0.5"></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== TAB 2: VOCABULARY & GRAMMAR DRILL ==================== -->
+    <section id="viewVocab" class="hidden space-y-6">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        <!-- Left 6 cols: Interactive Collocation Flashcards -->
+        <div class="lg:col-span-6 bg-white rounded-2xl border border-slate-200 p-5 shadow-sm flex flex-col justify-between space-y-4">
+          <div class="space-y-3">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <div>
+                <span class="text-xs font-bold uppercase tracking-wider text-indigo-600">British Council Core Inventory</span>
+                <h2 class="text-lg font-bold text-slate-900">20 Cụm Từ Đa Năng (Collocations) Dùng Cho Mọi Đề</h2>
+              </div>
+              <span id="flashcardCounterBadge" class="text-xs font-semibold bg-indigo-50 text-indigo-700 px-3 py-1 rounded-full">
+                Thẻ 1 / 20
+              </span>
+            </div>
+
+            <!-- Category Filter Pills -->
+            <div class="flex flex-wrap gap-1.5 pt-1" id="vocabCategoryBtns">
+              <button type="button" data-cat="all" class="vocab-cat-btn text-xs font-semibold px-3 py-1.5 rounded-lg bg-indigo-600 text-white">Tất cả (20)</button>
+              <button type="button" data-cat="benefit" class="vocab-cat-btn text-xs font-semibold px-3 py-1.5 rounded-lg bg-slate-100 text-slate-700 hover:bg-slate-200">Lợi ích & Sở thích</button>
+              <button type="button" data-cat="linker" class="vocab-cat-btn text-xs font-semibold px-3 py-1.5 rounded-lg bg-slate-100 text-slate-700 hover:bg-slate-200">Từ nối ăn điểm</button>
+              <button type="button" data-cat="informal" class="vocab-cat-btn text-xs font-semibold px-3 py-1.5 rounded-lg bg-slate-100 text-slate-700 hover:bg-slate-200">Email Thân mật (4.1)</button>
+              <button type="button" data-cat="formal" class="vocab-cat-btn text-xs font-semibold px-3 py-1.5 rounded-lg bg-slate-100 text-slate-700 hover:bg-slate-200">Email Trang trọng (4.2)</button>
+            </div>
+
+            <!-- Active Flashcard Box -->
+            <div id="flashcardBox" class="mt-3 rounded-2xl border-2 border-indigo-100 bg-gradient-to-br from-slate-50 to-indigo-50/40 p-5 min-h-[250px] flex flex-col justify-between transition">
+              <div class="flex items-center justify-between text-xs">
+                <span id="fcCategoryTag" class="font-semibold text-indigo-700 bg-indigo-100/80 px-2.5 py-0.5 rounded-md">Lợi ích & Sở thích</span>
+                <span id="fcMasteredTag" class="font-semibold text-slate-500">Chưa đánh dấu thuộc</span>
+              </div>
+
+              <div class="my-4 space-y-2">
+                <div class="text-xs uppercase font-bold tracking-wider text-slate-400">Cụm từ tiếng Anh chuẩn B1:</div>
+                <h3 id="fcPhrase" class="text-xl sm:text-2xl font-bold text-indigo-950"></h3>
+                <p id="fcMeaning" class="text-sm font-medium text-emerald-700"></p>
+                <div class="p-3 bg-white rounded-xl border border-slate-200/80 mt-2">
+                  <div class="text-[11px] font-bold text-slate-400 uppercase">Câu ví dụ áp dụng vào bài thi:</div>
+                  <p id="fcExample" class="text-xs sm:text-sm text-slate-800 mt-0.5 font-medium"></p>
+                  <p id="fcNote" class="text-[11px] text-amber-700 mt-1"></p>
+                </div>
+              </div>
+
+              <div class="flex items-center justify-between gap-2 pt-2 border-t border-slate-200/70">
+                <div class="flex items-center gap-2">
+                  <button id="btnPrevCard" type="button" class="px-3 py-2 rounded-xl bg-white border border-slate-300 text-xs font-semibold hover:bg-slate-100 transition">
+                    ← Trước
+                  </button>
+                  <button id="btnNextCard" type="button" class="px-3 py-2 rounded-xl bg-white border border-slate-300 text-xs font-semibold hover:bg-slate-100 transition">
+                    Tiếp theo →
+                  </button>
+                </div>
+                <button id="btnToggleMastered" type="button" class="px-3.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold transition">
+                  ✓ Đánh dấu Đã thuộc
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quick List of All Filtered Phrases -->
+          <div class="border-t border-slate-100 pt-3">
+            <div class="text-xs font-bold text-slate-500 uppercase mb-2">Danh sách nhanh (Click để xem chi tiết):</div>
+            <div id="vocabQuickList" class="max-h-44 overflow-y-auto custom-scroll grid grid-cols-1 sm:grid-cols-2 gap-1.5 pr-1"></div>
+          </div>
+        </div>
+
+        <!-- Right 6 cols: Interactive Grammar Error Correction Quiz -->
+        <div class="lg:col-span-6 bg-white rounded-2xl border border-slate-200 p-5 shadow-sm flex flex-col justify-between space-y-4">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <div>
+                <span class="text-xs font-bold uppercase tracking-wider text-amber-600">Luyện Phản Xạ Viết Đúng + Điểm Core</span>
+                <h2 class="text-lg font-bold text-slate-900">10 Lỗi Ngữ Pháp Kinh Điển Khi Viết Aptis B1</h2>
+              </div>
+              <button id="btnResetQuiz" type="button" class="text-xs font-semibold text-slate-600 hover:text-indigo-600 bg-slate-100 px-3 py-1.5 rounded-lg">
+                Làm lại từ đầu
+              </button>
+            </div>
+
+            <p class="text-xs text-slate-600">
+              Chọn cách diễn đạt <strong>đúng chuẩn ngữ pháp và văn phong (Register)</strong> của Hội đồng Anh. Mỗi câu có giải thích lý do tại sao các phương án còn lại bị trừ điểm.
+            </p>
+
+            <!-- Quiz Question Container -->
+            <div class="rounded-2xl border border-slate-200 bg-slate-50 p-4 space-y-4">
+              <div class="flex items-center justify-between text-xs">
+                <span id="quizQuestionNumber" class="font-bold text-indigo-700">Câu 1 / 10</span>
+                <span id="quizTopicTag" class="bg-amber-100 text-amber-800 px-2.5 py-0.5 rounded-md font-medium">Cấu trúc Động từ</span>
+              </div>
+
+              <div>
+                <div class="text-xs text-slate-500 mb-1" id="quizVietnamesePrompt"></div>
+                <p id="quizQuestionText" class="text-sm sm:text-base font-bold text-slate-900"></p>
+              </div>
+
+              <div id="quizOptionsContainer" class="space-y-2"></div>
+
+              <!-- Feedback Box -->
+              <div id="quizFeedbackBox" class="hidden p-3.5 rounded-xl text-xs space-y-1"></div>
+
+              <div class="flex items-center justify-between pt-2 border-t border-slate-200">
+                <button id="btnPrevQuiz" type="button" class="px-3 py-1.5 rounded-lg bg-white border border-slate-300 text-xs font-semibold hover:bg-slate-100">
+                  ← Câu trước
+                </button>
+                <button id="btnNextQuiz" type="button" class="px-4 py-1.5 rounded-lg bg-indigo-600 text-white text-xs font-semibold hover:bg-indigo-700">
+                  Câu tiếp theo →
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Core Grammar Golden Rules Summary -->
+          <div class="bg-indigo-50/70 rounded-xl border border-indigo-100 p-4 space-y-2">
+            <h4 class="text-xs font-bold uppercase tracking-wider text-indigo-950">
+              💡 4 Quy tắc "Chống Sai Ngữ Pháp" cần nhớ trước khi bấm nộp bài:
+            </h4>
+            <ul class="text-xs text-slate-700 space-y-1.5 list-disc pl-4">
+              <li>Sau giới từ (<strong>in, on, at, about, for, of, without, look forward to</strong>) luôn dùng <strong>V-ing</strong> hoặc <strong>Danh từ</strong>.</li>
+              <li>Động từ đứng đầu câu làm chủ ngữ luôn thêm <strong>-ing</strong> (Ví dụ: <em><strong>Reading</strong> books <strong>helps</strong> me relax</em> — chia động từ số ít).</li>
+              <li>Sau <strong>can, could, should, will, would, must</strong> luôn là <strong>Động từ nguyên mẫu</strong> (không có <em>to</em>, không thêm <em>-s/-ed</em>).</li>
+              <li>Ở <strong>Email 2 (Part 4 Trang trọng)</strong>: Tuyệt đối <strong>không viết tắt</strong> (<em>I am, do not, cannot, would like</em>) và không dùng từ cảm thán suồng sã.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== TAB 3: 4-PART WRITING SIMULATOR & SCORER ==================== -->
+    <section id="viewSimulator" class="hidden space-y-6">
+      <!-- Top Control Bar: Club Selector + Timer + Action Buttons -->
+      <div class="bg-white rounded-2xl border border-slate-200 p-4 sm:p-5 shadow-sm flex flex-wrap items-center justify-between gap-4">
+        <div class="flex flex-wrap items-center gap-3">
+          <div>
+            <label for="simClubSelect" class="block text-[11px] font-bold uppercase text-slate-500 mb-1">Chọn Bộ Đề Câu Lạc Bộ:</label>
+            <select id="simClubSelect" class="rounded-xl border border-slate-300 bg-slate-50 px-3.5 py-2 text-xs sm:text-sm font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+              <option value="travel">✈️ Đề 1: Travel Club (Câu lạc bộ Du lịch)</option>
+              <option value="book">📖 Đề 2: Book Club (Câu lạc bộ Đọc sách)</option>
+              <option value="fitness">🏃 Đề 3: Fitness & Health Club (CLB Thể thao)</option>
+              <option value="photo">📷 Đề 4: Photography Club (CLB Nhiếp ảnh)</option>
+            </select>
+          </div>
+
+          <div class="flex items-center gap-2 pt-4 sm:pt-4">
+            <button id="btnLoadSampleAnswers" type="button" class="text-xs font-semibold bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200 px-3 py-2 rounded-xl transition">
+              👁️ Điền Bài Mẫu Chuẩn B1 Để Tham Khảo
+            </button>
+            <button id="btnClearSimulator" type="button" class="text-xs font-semibold bg-slate-100 hover:bg-slate-200 text-slate-700 px-3 py-2 rounded-xl transition">
+              🗑️ Xóa Trắng Để Tự Viết
+            </button>
+          </div>
+        </div>
+
+        <!-- 50-Minute Countdown Timer -->
+        <div class="flex items-center gap-3 bg-slate-900 text-white px-4 py-2.5 rounded-xl">
+          <div>
+            <div class="text-[10px] uppercase tracking-wider text-slate-400">Thời gian làm bài (50 phút)</div>
+            <div id="simTimerDisplay" class="text-lg font-mono font-bold text-emerald-400">50:00</div>
+          </div>
+          <div class="flex items-center gap-1.5">
+            <button id="btnToggleTimer" type="button" class="bg-indigo-600 hover:bg-indigo-500 text-xs font-semibold px-3 py-1.5 rounded-lg transition">
+              Bắt đầu
+            </button>
+            <button id="btnResetTimer" type="button" class="bg-slate-700 hover:bg-slate-600 text-xs font-semibold px-2.5 py-1.5 rounded-lg transition">
+              Đặt lại
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Simulator Grid: Left 8 cols = 4 Parts Editor, Right 4 cols = Live B1 Analyzer & Rubric Scorer -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        <!-- Left 8 cols: 4 Parts -->
+        <div class="lg:col-span-8 space-y-5">
+
+          <!-- PART 1 -->
+          <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm space-y-4">
+            <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3">
+              <div>
+                <span class="text-xs font-bold uppercase tracking-wider text-indigo-600">Part 1 • Word-level Writing (Khuyến nghị: 3 phút)</span>
+                <h3 class="text-base font-bold text-slate-900">Trả lời 5 tin nhắn ngắn (1–5 từ/câu • Tối đa 3/3 điểm thô)</h3>
+              </div>
+              <span class="text-xs bg-emerald-50 text-emerald-700 border border-emerald-200 px-2.5 py-1 rounded-full font-medium">
+                Không trừ điểm ngữ pháp/chính tả
+              </span>
+            </div>
+            <div id="simPart1Container" class="grid grid-cols-1 sm:grid-cols-2 gap-3"></div>
+          </div>
+
+          <!-- PART 2 -->
+          <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm space-y-3">
+            <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3">
+              <div>
+                <span class="text-xs font-bold uppercase tracking-wider text-indigo-600">Part 2 • Short Text Writing (Khuyến nghị: 7 phút)</span>
+                <h3 class="text-base font-bold text-slate-900">Viết đoạn ngắn 20–30 từ (Tối đa 5/5 điểm thô - Mức B1)</h3>
+              </div>
+              <span id="p2WordBadge" class="text-xs font-bold px-3 py-1 rounded-full bg-slate-100 text-slate-700">
+                0 / 20–30 từ
+              </span>
+            </div>
+
+            <p id="simPart2Prompt" class="text-xs sm:text-sm font-semibold text-slate-800 bg-slate-50 p-3 rounded-xl border border-slate-200"></p>
+
+            <div class="flex flex-wrap items-center gap-1.5 text-xs">
+              <span class="text-slate-500 font-medium">Chèn nhanh khung câu B1:</span>
+              <button type="button" data-target="simPart2Input" data-insert="I decided to join this club because I want to " class="quick-insert-btn bg-indigo-50 hover:bg-indigo-100 text-indigo-700 px-2.5 py-1 rounded-lg font-medium">+ I decided to join...</button>
+              <button type="button" data-target="simPart2Input" data-insert="In addition, it helps me make new friends and relax after work." class="quick-insert-btn bg-indigo-50 hover:bg-indigo-100 text-indigo-700 px-2.5 py-1 rounded-lg font-medium">+ In addition, it helps me...</button>
+            </div>
+
+            <textarea id="simPart2Input" rows="3" placeholder="Viết 2–3 câu hoàn chỉnh (tổng 20–30 từ)..." class="w-full rounded-xl border border-slate-300 p-3 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"></textarea>
+          </div>
+
+          <!-- PART 3 -->
+          <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm space-y-4">
+            <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3">
+              <div>
+                <span class="text-xs font-bold uppercase tracking-wider text-indigo-600">Part 3 • Social Network Interaction (Khuyến nghị: 10–12 phút)</span>
+                <h3 class="text-base font-bold text-slate-900">Trả lời 3 câu hỏi trong phòng chat CLB (30–40 từ/câu • Tối đa 5/5 điểm thô)</h3>
+              </div>
+              <span class="text-xs bg-amber-50 text-amber-800 border border-amber-200 px-2.5 py-1 rounded-full font-medium">
+                Trả lời đủ cả 3 câu để đạt ≥ 4/5 (B1.2)
+              </span>
+            </div>
+
+            <div id="simPart3Container" class="space-y-4"></div>
+          </div>
+
+          <!-- PART 4 -->
+          <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm space-y-5">
+            <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3">
+              <div>
+                <span class="text-xs font-bold uppercase tracking-wider text-indigo-600">Part 4 • Formal & Informal Emails (Khuyến nghị: 28–30 phút)</span>
+                <h3 class="text-base font-bold text-slate-900">Viết 2 Email phản hồi thông báo từ CLB (Tối đa 6/6 điểm thô)</h3>
+              </div>
+              <span class="text-xs bg-indigo-50 text-indigo-800 border border-indigo-200 px-2.5 py-1 rounded-full font-medium">
+                Phân biệt rõ Văn phong (Register)
+              </span>
+            </div>
+
+            <!-- Context Situation Box -->
+            <div class="bg-amber-50/80 border border-amber-200 rounded-xl p-3.5 space-y-1">
+              <div class="text-xs font-bold uppercase tracking-wider text-amber-900">📢 Thông báo từ Câu lạc bộ (Context):</div>
+              <p id="simPart4Context" class="text-xs sm:text-sm text-slate-800 font-medium leading-relaxed"></p>
+            </div>
+
+            <!-- Email 4.1 Informal -->
+            <div class="space-y-2.5 border-t border-slate-100 pt-3">
+              <div class="flex flex-wrap items-center justify-between gap-2">
+                <div>
+                  <span class="text-xs font-bold text-emerald-700 uppercase">Email 4.1 – Gửi người bạn thân trong CLB (Văn phong thân mật • 40–50 từ)</span>
+                  <p id="simPart41Prompt" class="text-xs text-slate-600 mt-0.5"></p>
+                </div>
+                <div class="flex items-center gap-2">
+                  <button id="btnTemplate41" type="button" class="text-xs font-semibold bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border border-emerald-200 px-2.5 py-1 rounded-lg">
+                    + Chèn Khung Thư Thân Mật
+                  </button>
+                  <span id="p41WordBadge" class="text-xs font-bold px-3 py-1 rounded-full bg-slate-100 text-slate-700">0 / 40–50 từ</span>
+                </div>
+              </div>
+              <textarea id="simPart41Input" rows="4" placeholder="Hi [Tên bạn], Have you heard about the news from the club?..." class="w-full rounded-xl border border-slate-300 p-3 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"></textarea>
+            </div>
+
+            <!-- Email 4.2 Formal -->
+            <div class="space-y-2.5 border-t border-slate-100 pt-3">
+              <div class="flex flex-wrap items-center justify-between gap-2">
+                <div>
+                  <span class="text-xs font-bold text-indigo-700 uppercase">Email 4.2 – Gửi Quản lý / Ban tổ chức CLB (Văn phong trang trọng • 120–150 từ)</span>
+                  <p id="simPart42Prompt" class="text-xs text-slate-600 mt-0.5"></p>
+                </div>
+                <div class="flex items-center gap-2">
+                  <button id="btnTemplate42" type="button" class="text-xs font-semibold bg-indigo-50 hover:bg-indigo-100 text-indigo-700 border border-indigo-200 px-2.5 py-1 rounded-lg">
+                    + Chèn Khung Thư Trang Trọng
+                  </button>
+                  <span id="p42WordBadge" class="text-xs font-bold px-3 py-1 rounded-full bg-slate-100 text-slate-700">0 / 120–150 từ</span>
+                </div>
+              </div>
+              <textarea id="simPart42Input" rows="7" placeholder="Dear Sir or Madam, I am writing with regard to the recent announcement about..." class="w-full rounded-xl border border-slate-300 p-3 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right 4 cols: Live B1 Diagnostic & Score Calculator -->
+        <div class="lg:col-span-4 space-y-5">
+          <div class="bg-white rounded-2xl border-2 border-indigo-600 p-5 shadow-sm sticky top-28 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+              <div>
+                <span class="text-xs font-bold uppercase tracking-wider text-indigo-600">Chẩn Đoán & Quy Đổi Điểm</span>
+                <h3 class="text-base font-bold text-slate-900">Bảng Kiểm Tra Tiêu Chí B1</h3>
+              </div>
+              <button id="btnAnalyzeWriting" type="button" class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold px-3 py-1.5 rounded-lg transition">
+                🔄 Chấm Thử Ngay
+              </button>
+            </div>
+
+            <!-- Estimated Score Display -->
+            <div class="rounded-xl bg-slate-900 text-white p-4 flex items-center justify-between">
+              <div>
+                <div class="text-[11px] uppercase tracking-wider text-slate-400">Điểm quy đổi ước tính</div>
+                <div class="flex items-baseline gap-2 mt-0.5">
+                  <span id="estScaleScore" class="text-2xl sm:text-3xl font-extrabold text-emerald-400">0 / 50</span>
+                  <span id="estRawScore" class="text-xs text-slate-300">(0/19 điểm thô)</span>
+                </div>
+              </div>
+              <div class="text-right">
+                <div class="text-[11px] uppercase tracking-wider text-slate-400">Mức CEFR</div>
+                <span id="estCefrBadge" class="inline-block mt-1 px-3 py-1 rounded-lg font-bold text-sm bg-slate-700 text-slate-200">
+                  Chưa chấm
+                </span>
+              </div>
+            </div>
+
+            <!-- Automated Diagnostics List -->
+            <div class="space-y-2">
+              <div class="text-xs font-bold uppercase tracking-wider text-slate-500">1. Kiểm tra tự động (Số từ, Từ nối & Văn phong):</div>
+              <div id="autoCheckList" class="space-y-1.5 text-xs">
+                <!-- Populated by JS -->
+              </div>
+            </div>
+
+            <!-- Manual Self-Assessment Sliders per Part -->
+            <div class="space-y-2.5 border-t border-slate-200 pt-3">
+              <div class="text-xs font-bold uppercase tracking-wider text-slate-500">2. Điều chỉnh điểm thô từng Part theo Rubric:</div>
+
+              <div class="space-y-1">
+                <div class="flex justify-between text-xs">
+                  <span class="font-medium text-slate-700">Part 1 (Hiểu nghĩa 5 câu):</span>
+                  <span id="lblScoreP1" class="font-bold text-indigo-700">3 / 3</span>
+                </div>
+                <input id="rngScoreP1" type="range" min="0" max="3" value="3" class="w-full accent-indigo-600" />
+              </div>
+
+              <div class="space-y-1">
+                <div class="flex justify-between text-xs">
+                  <span class="font-medium text-slate-700">Part 2 (Đúng chủ đề, câu nối cơ bản):</span>
+                  <span id="lblScoreP2" class="font-bold text-indigo-700">4 / 5</span>
+                </div>
+                <input id="rngScoreP2" type="range" min="0" max="5" value="4" class="w-full accent-indigo-600" />
+              </div>
+
+              <div class="space-y-1">
+                <div class="flex justify-between text-xs">
+                  <span class="font-medium text-slate-700">Part 3 (Đủ 3 câu, mạch lạc B1):</span>
+                  <span id="lblScoreP3" class="font-bold text-indigo-700">4 / 5</span>
+                </div>
+                <input id="rngScoreP3" type="range" min="0" max="5" value="4" class="w-full accent-indigo-600" />
+              </div>
+
+              <div class="space-y-1">
+                <div class="flex justify-between text-xs">
+                  <span class="font-medium text-slate-700">Part 4 (Đúng 2 văn phong B1.2–B2.1):</span>
+                  <span id="lblScoreP4" class="font-bold text-indigo-700">2 / 6</span>
+                </div>
+                <input id="rngScoreP4" type="range" min="0" max="6" value="2" class="w-full accent-indigo-600" />
+              </div>
+
+              <div class="flex items-center justify-between pt-1">
+                <label for="chkCoreBoost" class="text-xs text-slate-700 font-medium cursor-pointer">
+                  Kích hoạt "Vùng xám" (Điểm Core Ngữ pháp/Từ vựng tốt)
+                </label>
+                <input id="chkCoreBoost" type="checkbox" checked class="w-4 h-4 accent-indigo-600 rounded" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== TAB 4: NOTEBOOK & B1 CHEAT SHEET ==================== -->
+    <section id="viewNotebook" class="hidden space-y-6">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        <!-- Saved Sentences Column -->
+        <div class="lg:col-span-6 bg-white rounded-2xl border border-slate-200 p-5 shadow-sm space-y-4">
+          <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+            <div>
+              <span class="text-xs font-bold uppercase tracking-wider text-indigo-600">Cá Nhân Hóa</span>
+              <h2 class="text-lg font-bold text-slate-900">Sổ Tay Các Câu B1 Bạn Đã Ráp & Lưu</h2>
+            </div>
+            <button id="btnClearSavedSentences" type="button" class="text-xs font-semibold text-rose-600 hover:bg-rose-50 px-2.5 py-1 rounded-lg">
+              Xóa tất cả
+            </button>
+          </div>
+          <div id="savedSentencesList" class="space-y-2.5 max-h-[500px] overflow-y-auto custom-scroll pr-1"></div>
+        </div>
+
+        <!-- Master Cheat Sheet Column -->
+        <div class="lg:col-span-6 bg-white rounded-2xl border border-slate-200 p-5 shadow-sm space-y-4">
+          <div class="border-b border-slate-100 pb-3">
+            <span class="text-xs font-bold uppercase tracking-wider text-emerald-600">Khung Mẫu Học Thuộc Lòng</span>
+            <h2 class="text-lg font-bold text-slate-900">Khung Sườn Email Part 4 (Áp Dụng Cho 100% Đề Thi)</h2>
+          </div>
+
+          <div class="space-y-4 text-xs sm:text-sm">
+            <div class="p-4 rounded-xl bg-emerald-50/70 border border-emerald-200 space-y-2">
+              <div class="font-bold text-emerald-900 flex items-center justify-between">
+                <span>1. Khung Email 4.1 – Gửi Bạn Thân (40–50 từ • Văn phong Thân mật)</span>
+                <button type="button" id="btnCopyTemplate41" class="text-xs bg-white border border-emerald-300 px-2.5 py-1 rounded-lg font-semibold text-emerald-800 hover:bg-emerald-100">Copy khung</button>
+              </div>
+              <p id="txtCheat41" class="text-slate-800 font-mono text-xs leading-relaxed bg-white p-3 rounded-lg border border-emerald-100">Hi Linh,
+How are things? Have you heard that our club is going to [thay đổi trong đề]? Honestly, I feel quite disappointed about this news because [lý do ngắn]. Why don't we [đề xuất của bạn] instead? Let me know what you think!
+See you soon,</p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-indigo-50/70 border border-indigo-200 space-y-2">
+              <div class="font-bold text-indigo-900 flex items-center justify-between">
+                <span>2. Khung Email 4.2 – Gửi Quản Lý CLB (120–150 từ • Văn phong Trang trọng)</span>
+                <button type="button" id="btnCopyTemplate42" class="text-xs bg-white border border-indigo-300 px-2.5 py-1 rounded-lg font-semibold text-indigo-800 hover:bg-indigo-100">Copy khung</button>
+              </div>
+              <p id="txtCheat42" class="text-slate-800 font-mono text-xs leading-relaxed bg-white p-3 rounded-lg border border-indigo-100">Dear Sir or Madam,
+I am writing this email with regard to the recent announcement from our club about [nêu thay đổi trong đề]. I have been an active member of the club for over a year.
+To be honest, I was quite disappointed to hear this news. In my opinion, this change is quite inconvenient for many members because [nêu lý do 1]. In addition, [nêu lý do 2].
+Therefore, I would like to make a constructive suggestion. It would be much better if the club could [đề xuất giải pháp 1]. Moreover, we could also [đề xuất giải pháp 2] so that everyone can participate comfortably.
+Thank you very much for considering my suggestions. I look forward to hearing from you soon.
+Yours faithfully,
+[Tên của bạn]</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    // ==================== DATA STORE ====================
+    const BUILDER_SCENARIOS = [
+      {
+        id: 'reason',
+        shortLabel: '1. Nêu lý do tham gia CLB',
+        partBadge: 'Part 2 & Part 3 (Câu 1)',
+        title: 'Diễn đạt lý do bạn tham gia Câu lạc bộ & sở thích cá nhân',
+        badExample: 'I join club because I very like travel and want have many new friend.',
+        badReason: 'Sai: "very like" (phải dùng really like), "want have" (thiếu to -> want to have), "many new friend" (thiếu -s số nhiều).',
+        grammarPoint: 'Cấu trúc chuẩn B1: "decided to join ... because", sau "want to / helps me" là động từ nguyên mẫu, dùng cụm danh từ số nhiều "new friends".',
+        step1: [
+          { en: 'I decided to join this club because I want to', vi: 'Tôi quyết định tham gia CLB này vì tôi muốn...' },
+          { en: 'The main reason I joined the club is that it helps me', vi: 'Lý do chính tôi tham gia CLB là vì nó giúp tôi...' },
+          { en: 'I have always been interested in this club as I would like to', vi: 'Tôi luôn quan tâm đến CLB này vì tôi muốn...' },
+          { en: 'Joining this club is a great way for me to', vi: 'Tham gia CLB này là một cách tuyệt vời để tôi...' }
+        ],
+        step2: [
+          { en: 'broaden my knowledge and learn practical skills.', vi: 'mở rộng kiến thức và học các kỹ năng thực tế.' },
+          { en: 'make friends with people who share the same interest.', vi: 'kết bạn với những người có cùng sở thích.' },
+          { en: 'relax and reduce stress after hard working hours.', vi: 'thư giãn và giảm căng thẳng sau giờ làm việc vất vả.' },
+          { en: 'keep fit and maintain a healthy lifestyle.', vi: 'giữ dáng và duy trì lối sống lành mạnh.' }
+        ],
+        step3: [
+          { en: 'In addition, I usually spend two hours every weekend practising with other members.', vi: 'Thêm vào đó, tôi thường dành 2 tiếng mỗi cuối tuần luyện tập cùng các thành viên khác.' },
+          { en: 'Moreover, the club activities are always exciting and useful for my daily life.', vi: 'Hơn nữa, các hoạt động của CLB luôn thú vị và hữu ích cho cuộc sống hằng ngày của tôi.' },
+          { en: 'Therefore, I feel much happier and more confident every time I attend a meeting.', vi: 'Vì vậy, tôi cảm thấy vui vẻ và tự tin hơn nhiều mỗi khi tham dự buổi sinh hoạt.' },
+          { en: 'For example, I can share my own experiences and learn from experts in the club.', vi: 'Ví dụ, tôi có thể chia sẻ kinh nghiệm của mình và học hỏi từ các chuyên gia trong CLB.' }
+        ]
+      },
+      {
+        id: 'past',
+        shortLabel: '2. Kể kỷ niệm / Trải nghiệm',
+        partBadge: 'Part 3 (Câu 2)',
+        title: 'Kể lại một buổi sinh hoạt / trải nghiệm đáng nhớ trong quá khứ',
+        badExample: 'Last month I go to Da Nang with club and it very fun, I take many photo.',
+        badReason: 'Sai: Kể chuyện quá khứ nhưng quên chia động từ Quá khứ đơn (go -> went, take -> took), thiếu động từ to be (it very fun -> it was very fun).',
+        grammarPoint: 'Chia đúng toàn bộ động từ ở thì Quá khứ đơn (attended, went, learned, had, felt) kết hợp trạng từ chỉ thời gian quá khứ.',
+        step1: [
+          { en: 'Last month, I had an unforgettable experience when I', vi: 'Tháng trước, tôi đã có một trải nghiệm khó quên khi tôi...' },
+          { en: 'Two weeks ago, I took part in a special club event and', vi: 'Hai tuần trước, tôi đã tham gia một sự kiện đặc biệt của CLB và...' },
+          { en: 'The most memorable time I had with the club was when we', vi: 'Khoảnh khắc đáng nhớ nhất của tôi với CLB là khi chúng tôi...' },
+          { en: 'When I first joined the club last year, I', vi: 'Khi tôi mới tham gia CLB vào năm ngoái, tôi đã...' }
+        ],
+        step2: [
+          { en: 'attended an outdoor workshop with over thirty members.', vi: 'tham dự một buổi thực hành ngoài trời cùng hơn 30 thành viên.' },
+          { en: 'learned many helpful techniques from a famous guest speaker.', vi: 'học được nhiều kỹ thuật bổ ích từ một diễn giả khách mời nổi tiếng.' },
+          { en: 'prepared a group project together and won a small prize.', vi: 'cùng nhau chuẩn bị một dự án nhóm và giành được một giải thưởng nhỏ.' },
+          { en: 'visited a beautiful place and shared a delicious meal together.', vi: 'ghé thăm một địa điểm tuyệt đẹp và cùng thưởng thức bữa ăn ngon.' }
+        ],
+        step3: [
+          { en: 'At first, I felt a bit nervous, but everyone was extremely friendly and supportive.', vi: 'Lúc đầu tôi thấy hơi lo lắng, nhưng mọi người đều vô cùng thân thiện và nhiệt tình hỗ trợ.' },
+          { en: 'As a result, I gained a lot of valuable experience and took many wonderful photos.', vi: 'Kết quả là tôi đã tích lũy được nhiều kinh nghiệm quý giá và chụp được nhiều bức ảnh đẹp.' },
+          { en: 'Although the weather was quite hot, we still enjoyed every moment of the trip.', vi: 'Mặc dù thời tiết khá nóng, chúng tôi vẫn tận hưởng từng khoảnh khắc của chuyến đi.' },
+          { en: 'That event helped me become much more confident in my skills.', vi: 'Sự kiện đó đã giúp tôi trở nên tự tin hơn rất nhiều vào kỹ năng của mình.' }
+        ]
+      },
+      {
+        id: 'opinion',
+        shortLabel: '3. Nêu quan điểm / Lợi ích',
+        partBadge: 'Part 3 (Câu 3)',
+        title: 'Nêu quan điểm về một kế hoạch hoặc lợi ích cho các thành viên',
+        badExample: 'According to me, organise online class is very good because save time.',
+        badReason: 'Sai: Không dùng "According to me" (phải dùng In my opinion), động từ đầu câu thiếu -ing (Organising), sau "because" thiếu chủ ngữ (because it saves time).',
+        grammarPoint: 'Dùng chuẩn cụm mở đầu quan điểm "In my opinion," + Danh động từ V-ing làm chủ ngữ hoặc cấu trúc giả định "It is beneficial for members to + V".',
+        step1: [
+          { en: 'In my opinion, organising more weekend activities will help members', vi: 'Theo ý kiến của tôi, việc tổ chức thêm hoạt động cuối tuần sẽ giúp các thành viên...' },
+          { en: 'I strongly believe that it is very beneficial for young people to', vi: 'Tôi hoàn toàn tin rằng sẽ rất có lợi cho người trẻ khi...' },
+          { en: 'From my point of view, combining online and offline meetings allows us to', vi: 'Theo quan điểm của tôi, kết hợp họp trực tuyến và trực tiếp cho phép chúng ta...' },
+          { en: 'I think the best way to attract more new members is to', vi: 'Tôi nghĩ cách tốt nhất để thu hút thêm thành viên mới là...' }
+        ],
+        step2: [
+          { en: 'save travel time and participate more regularly.', vi: 'tiết kiệm thời gian đi lại và tham gia đều đặn hơn.' },
+          { en: 'develop both teamwork and communication skills effectively.', vi: 'phát triển hiệu quả cả kỹ năng làm việc nhóm lẫn giao tiếp.' },
+          { en: 'offer free trial sessions and discounts for students.', vi: 'cung cấp các buổi học thử miễn phí và giảm giá cho sinh viên.' },
+          { en: 'exchange creative ideas in a comfortable environment.', vi: 'trao đổi các ý tưởng sáng tạo trong một môi trường thoải mái.' }
+        ],
+        step3: [
+          { en: 'Furthermore, this will make our club community much stronger and more active.', vi: 'Hơn thế nữa, điều này sẽ giúp cộng đồng CLB của chúng ta vững mạnh và năng động hơn.' },
+          { en: 'If we carry out this plan soon, everyone will be very excited to join.', vi: 'Nếu chúng ta thực hiện kế hoạch này sớm, mọi người sẽ rất hào hứng tham gia.' },
+          { en: 'However, we should also ask for members\' feedback before making the final decision.', vi: 'Tuy nhiên, chúng ta cũng nên hỏi ý kiến phản hồi của thành viên trước khi quyết định cuối cùng.' },
+          { en: 'Therefore, I hope the club will put this great idea into practice next month.', vi: 'Do đó, tôi hy vọng CLB sẽ đưa ý tưởng tuyệt vời này vào thực tế trong tháng tới.' }
+        ]
+      },
+      {
+        id: 'informal_email',
+        shortLabel: '4. Email Thân mật (Part 4.1)',
+        partBadge: 'Part 4.1 (40–50 từ • Gửi bạn)',
+        title: 'Bày tỏ cảm xúc và rủ bạn bè trong Email Thân Mật (Informal Register)',
+        badExample: 'Dear my friend, I am writing to inform you that I feel sad about the club change.',
+        badReason: 'Sai văn phong (Register): Dùng "I am writing to inform you" quá trang trọng khi viết cho bạn thân, làm mất điểm phân biệt Register ở Part 4.',
+        grammarPoint: 'Dùng dạng rút gọn (I\'m, don\'t, can\'t) và câu hỏi gợi ý thân mật (Why don\'t we + V?, What do you think?) đúng chuẩn Informal.',
+        step1: [
+          { en: 'Hi Minh, have you heard that our club is going to', vi: 'Chào Minh, cậu đã nghe tin CLB mình sắp...' },
+          { en: 'Hey Lan, I\'ve just got an email saying that the club will', vi: 'Chào Lan, mình vừa nhận được email báo rằng CLB sẽ...' },
+          { en: 'Hi Nam, what a pity! The club manager has just decided to', vi: 'Chào Nam, tiếc quá! Quản lý CLB vừa quyết định...' },
+          { en: 'Hey Linh, I\'m so excited to hear that our club is going to', vi: 'Chào Linh, mình hào hứng quá khi nghe tin CLB mình sắp...' }
+        ],
+        step2: [
+          { en: 'change the meeting schedule to Tuesday evenings?', vi: 'đổi lịch sinh hoạt sang tối thứ Ba chưa?' },
+          { en: 'increase the monthly membership fee by twenty percent.', vi: 'tăng phí thành viên hằng tháng thêm 20%.' },
+          { en: 'cancel our outdoor trip next weekend because of bad weather.', vi: 'hủy chuyến dã ngoại cuối tuần sau vì thời tiết xấu.' },
+          { en: 'invite a famous expert to give a talk next Saturday!', vi: 'mời một chuyên gia nổi tiếng đến nói chuyện vào thứ Bảy tới!' }
+        ],
+        step3: [
+          { en: 'I\'m quite disappointed because I\'m busy then. Why don\'t we email the manager to ask for an online option? Write back soon!', vi: 'Mình khá thất vọng vì lúc đó mình bận. Sao tụi mình không gửi email xin quản lý mở thêm lớp online nhỉ? Nhắn lại sớm nhé!' },
+          { en: 'Honestly, I don\'t think that\'s a good idea. Let\'s talk to other members and suggest another day. What do you think?', vi: 'Thật lòng mình không nghĩ đó là ý hay. Hãy nói chuyện với các bạn khác và đề xuất ngày khác nhé. Cậu thấy sao?' },
+          { en: 'I can\'t wait to join! Let\'s register together this evening so we don\'t miss out. See you soon!', vi: 'Mình mong được tham gia quá! Tối nay tụi mình đăng ký chung để khỏi lỡ nhé. Hẹn gặp cậu sớm!' },
+          { en: 'It\'s a bit inconvenient for us, isn\'t it? Let\'s meet at the café tomorrow to discuss what we should do.', vi: 'Hơi bất tiện cho tụi mình nhỉ? Mai gặp nhau ở quán cà phê bàn xem nên làm gì nhé.' }
+        ]
+      },
+      {
+        id: 'formal_email',
+        shortLabel: '5. Email Trang trọng (Part 4.2)',
+        partBadge: 'Part 4.2 (120–150 từ • Gửi Quản lý)',
+        title: 'Phản hồi lịch sự & Đề xuất giải pháp trong Email Trang Trọng (Formal Register)',
+        badExample: 'Hi boss, I don\'t like the new schedule because I\'m busy. Please change it to Sunday.',
+        badReason: 'Sai văn phong nghiêm trọng: Dùng "Hi boss", viết tắt "don\'t, I\'m", mệnh lệnh trực tiếp "Please change it" thiếu lịch sự.',
+        grammarPoint: 'Dùng cấu trúc trang trọng: "I am writing with regard to...", không viết tắt, dùng câu giả định lịch sự "I would like to suggest + V-ing / It would be better if...".',
+        step1: [
+          { en: 'I am writing this email with regard to the recent announcement about', vi: 'Tôi viết email này liên quan đến thông báo gần đây về...' },
+          { en: 'I am writing to express my concern regarding the decision to', vi: 'Tôi viết thư này để bày tỏ sự quan ngại liên quan đến quyết định...' },
+          { en: 'As a regular member of the club, I would like to share my feedback on', vi: 'Là một thành viên thường xuyên của CLB, tôi muốn chia sẻ phản hồi về...' },
+          { en: 'Thank you for your recent email informing us about the plan to', vi: 'Cảm ơn email gần đây của Quý vị thông báo cho chúng tôi về kế hoạch...' }
+        ],
+        step2: [
+          { en: 'changing the time and location of our weekly club sessions.', vi: 'việc thay đổi thời gian và địa điểm các buổi sinh hoạt hằng tuần.' },
+          { en: 'cancelling the upcoming workshop and closing the library room.', vi: 'việc hủy buổi hội thảo sắp tới và đóng cửa phòng thư viện.' },
+          { en: 'raising the registration fee for the next training course.', vi: 'việc tăng lệ phí đăng ký cho khóa đào tạo tiếp theo.' },
+          { en: 'organising the annual club competition in a different city.', vi: 'việc tổ chức cuộc thi thường niên của CLB tại một thành phố khác.' }
+        ],
+        step3: [
+          { en: 'Unfortunately, this change is quite inconvenient for many working members. Therefore, I would like to suggest holding the meetings on Sunday mornings or recording the sessions online. I look forward to hearing from you.', vi: 'Đáng tiếc là thay đổi này khá bất tiện cho nhiều thành viên đi làm. Do đó, tôi muốn đề xuất tổ chức vào sáng Chủ nhật hoặc ghi hình buổi học trực tuyến. Tôi rất mong nhận được phản hồi từ Quý vị.' },
+          { en: 'While I understand the reason for this change, I am afraid many students cannot afford the higher cost. It would be much better if the club could offer a discount for loyal members.', vi: 'Mặc dù tôi hiểu lý do của sự thay đổi này, tôi e rằng nhiều sinh viên không đủ khả năng chi trả mức phí cao hơn. Sẽ tốt hơn nhiều nếu CLB có thể giảm giá cho thành viên lâu năm.' },
+          { en: 'In my opinion, this might reduce the number of participants. Could you please consider keeping the original schedule for at least one more month? Thank you for your kind consideration.', vi: 'Theo ý kiến của tôi, điều này có thể làm giảm số lượng người tham gia. Quý vị có thể vui lòng cân nhắc giữ lịch trình cũ thêm ít nhất một tháng không? Cảm ơn sự xem xét của Quý vị.' }
+        ]
+      }
+    ];
+
+    const VOCAB_CARDS = [
+      { id: 1, cat: 'benefit', phrase: 'broaden my knowledge', meaning: 'mở rộng kiến thức của tôi', example: 'Reading books every day helps me broaden my knowledge about the world.', note: 'Dùng thay cho "know more things" ở Part 2 và Part 3.' },
+      { id: 2, cat: 'benefit', phrase: 'share the same interest', meaning: 'có cùng chung sở thích', example: 'I joined the club to meet people who share the same interest.', note: 'Mệnh đề quan hệ "who share..." giúp bạn ăn điểm ngữ pháp B1+.' },
+      { id: 3, cat: 'benefit', phrase: 'reduce stress after work', meaning: 'giảm căng thẳng sau giờ làm việc', example: 'Playing badminton is a great way to reduce stress after work.', note: 'Cụm từ đa năng ráp được vào mọi CLB (Thể thao, Âm nhạc, Đọc sách, Nấu ăn).' },
+      { id: 4, cat: 'benefit', phrase: 'keep fit and stay healthy', meaning: 'giữ dáng và duy trì sức khỏe', example: 'Doing exercise regularly helps me keep fit and stay healthy.', note: 'Cực kỳ hữu ích cho các đề Fitness, Running, Swimming, Cooking Club.' },
+      { id: 5, cat: 'benefit', phrase: 'gain practical experience', meaning: 'tích lũy kinh nghiệm thực tế', example: 'Attending outdoor workshops allows me to gain practical experience.', note: 'Sau "allows me to" là động từ nguyên mẫu "gain".' },
+      { id: 6, cat: 'linker', phrase: 'In addition, / Moreover,', meaning: 'Thêm vào đó, / Hơn nữa, (Bổ sung ý)', example: 'The course is very useful. In addition, the tuition fee is reasonable.', note: 'Luôn đặt đầu câu thứ 2 hoặc thứ 3 và có dấu phẩy (,) đi kèm.' },
+      { id: 7, cat: 'linker', phrase: 'Therefore, / As a result,', meaning: 'Vì vậy, / Kết quả là, (Chỉ kết quả)', example: 'I have to work on Tuesday evenings. Therefore, I cannot attend the class.', note: 'Giúp nối các câu theo trình tự logic (linear sequence) đạt chuẩn B1.2.' },
+      { id: 8, cat: 'linker', phrase: 'However, / On the other hand,', meaning: 'Tuy nhiên, / Mặt khác, (Tương phản)', example: 'I really love the trip. However, the ticket price is quite high for students.', note: 'Rất hay dùng trong Part 3 và Part 4 khi nêu 1 điểm khen + 1 điểm góp ý.' },
+      { id: 9, cat: 'linker', phrase: 'Although + S + V, S + V', meaning: 'Mặc dù ... nhưng ...', example: 'Although the weather was bad, we still had a wonderful time together.', note: 'Lưu ý: Đã dùng "Although" thì vế sau TUYỆT ĐỐI KHÔNG dùng "but".' },
+      { id: 10, cat: 'linker', phrase: 'First of all, ... Secondly, ...', meaning: 'Trước hết là, ... Thứ hai là, ...', example: 'First of all, it saves time. Secondly, everyone can join from home.', note: 'Dùng khi cần liệt kê 2 lý do hoặc 2 giải pháp rõ ràng.' },
+      { id: 11, cat: 'informal', phrase: 'Have you heard about...?', meaning: 'Cậu đã nghe tin về... chưa?', example: 'Hi Lan, have you heard about the new schedule of our English club?', note: 'Câu mở đầu tự nhiên nhất cho Email 4.1 gửi bạn thân.' },
+      { id: 12, cat: 'informal', phrase: 'What a pity! / That\'s a shame!', meaning: 'Thật đáng tiếc!', example: 'What a pity! We won\'t be able to go camping together next week.', note: 'Cụm cảm thán ăn điểm văn phong thân mật (Informal register).' },
+      { id: 13, cat: 'informal', phrase: 'Why don\'t we + V (nguyên mẫu)...?', meaning: 'Sao tụi mình không cùng... nhỉ?', example: 'Why don\'t we suggest an online meeting to the club manager?', note: 'Cấu trúc rủ bạn bè / đề xuất trong Email 4.1.' },
+      { id: 14, cat: 'informal', phrase: 'Let me know what you think!', meaning: 'Cho mình biết cậu nghĩ sao nhé!', example: 'I think we should join the Sunday class. Let me know what you think!', note: 'Câu kết Email 4.1 vừa tự nhiên vừa đủ số từ 40–50 từ.' },
+      { id: 15, cat: 'informal', phrase: 'I can\'t wait to + V (nguyên mẫu)', meaning: 'Mình rất háo hức / mong chờ được...', example: 'I can\'t wait to see the photos from our last exhibition!', note: 'Dùng khi đề bài thông báo một sự kiện tích cực.' },
+      { id: 16, cat: 'formal', phrase: 'I am writing with regard to...', meaning: 'Tôi viết thư này liên quan đến...', example: 'I am writing with regard to the recent announcement about the membership fee.', note: 'Câu mở đầu chuẩn mực cho Email 4.2 gửi quản lý CLB.' },
+      { id: 17, cat: 'formal', phrase: 'I was quite disappointed to hear that...', meaning: 'Tôi khá thất vọng khi nghe tin rằng...', example: 'I was quite disappointed to hear that the workshop has been cancelled.', note: 'Cách bày tỏ sự không hài lòng một cách lịch sự, trang trọng.' },
+      { id: 18, cat: 'formal', phrase: 'be inconvenient for many members', meaning: 'gây bất tiện cho nhiều thành viên', example: 'Moving the class to Monday morning will be inconvenient for many members.', note: 'Lý do thuyết phục nhất để giải thích tại sao lịch mới không phù hợp.' },
+      { id: 19, cat: 'formal', phrase: 'I would like to suggest + V-ing', meaning: 'Tôi muốn đề xuất việc...', example: 'Therefore, I would like to suggest holding the event on Saturday afternoon.', note: 'Sau "suggest" nhớ dùng V-ing hoặc mệnh đề "that the club should + V".' },
+      { id: 20, cat: 'formal', phrase: 'I look forward to hearing from you.', meaning: 'Tôi rất mong nhận được phản hồi từ Quý vị.', example: 'Thank you for your consideration. I look forward to hearing from you.', note: 'Câu kết thư trang trọng kinh điển (Chú ý: hearing có -ing).' }
+    ];
+
+    const GRAMMAR_QUIZ = [
+      {
+        vi: 'Ý muốn nói: "Tôi tham gia câu lạc bộ để cải thiện kỹ năng chụp ảnh của mình."',
+        q: 'Chọn câu viết ĐÚNG ngữ pháp chuẩn B1:',
+        options: [
+          'I joined the club for improve my photography skills.',
+          'I joined the club to improve my photography skills.',
+          'I joined the club to improving my photography skills.'
+        ],
+        correct: 1,
+        explanation: 'Để chỉ mục đích ("để làm gì"), ta dùng "to + Động từ nguyên mẫu" (to improve). Không dùng "for + V nguyên mẫu".'
+      },
+      {
+        vi: 'Ý muốn nói: "Đọc sách mỗi ngày giúp tôi thư giãn sau giờ làm việc."',
+        q: 'Chọn câu viết ĐÚNG chủ ngữ và chia động từ:',
+        options: [
+          'Read books every day help me relax after work.',
+          'Reading books every day helps me relax after work.',
+          'Reading books every day helping me to relax after work.'
+        ],
+        correct: 1,
+        explanation: 'Khi động từ đứng đầu câu làm chủ ngữ, phải chuyển thành V-ing ("Reading books") và động từ chính chia ở ngôi số ít ("helps").'
+      },
+      {
+        vi: 'Ý muốn nói: "Mặc dù thời tiết xấu nhưng chúng tôi vẫn rất vui."',
+        q: 'Cấu trúc câu ghép nào dưới đây ĐÚNG ngữ pháp tiếng Anh?',
+        options: [
+          'Although the weather was bad, but we still had a great time.',
+          'Although the weather was bad, we still had a great time.',
+          'Despite the weather was bad, we still had a great time.'
+        ],
+        correct: 1,
+        explanation: 'Trong tiếng Anh, đã dùng "Although" ở mệnh đề đầu thì mệnh đề sau KHÔNG được dùng "but". Ngoài ra "Despite" chỉ đi với cụm danh từ/V-ing chứ không đi trực tiếp với mệnh đề "S + V".'
+      },
+      {
+        vi: 'Ý muốn nói: "Tôi rất hào hứng về chuyến đi sắp tới của câu lạc bộ."',
+        q: 'Chọn tính từ chỉ cảm xúc ĐÚNG của người viết:',
+        options: [
+          'I am very exciting about the upcoming club trip.',
+          'I am very excited about the upcoming club trip.',
+          'I feel very excite about the upcoming club trip.'
+        ],
+        correct: 1,
+        explanation: 'Tính từ đuôi "-ed" (excited, disappointed, interested, worried) dùng để tả cảm xúc của CON NGƯỜI; đuôi "-ing" (exciting, interesting) dùng để tả tính chất của sự vật/sự việc.'
+      },
+      {
+        vi: 'Ý muốn nói: "Tôi muốn đề xuất tổ chức buổi họp trực tuyến." (Email trang trọng Part 4.2)',
+        q: 'Sau động từ "suggest", cấu trúc nào dưới đây ĐÚNG chuẩn?',
+        options: [
+          'I would like to suggest to hold an online meeting.',
+          'I would like to suggest holding an online meeting.',
+          'I would like to suggest the club to hold an online meeting.'
+        ],
+        correct: 1,
+        explanation: 'Cấu trúc chuẩn là "suggest + V-ing" (suggest holding...) hoặc "suggest that + S + (should) + V nguyên mẫu". Động từ "suggest" không đi với "to V".'
+      },
+      {
+        vi: 'Ý muốn nói: "Tôi rất mong nhận được phản hồi sớm từ Quý vị." (Cuối Email 4.2)',
+        q: 'Chọn câu kết thư trang trọng ĐÚNG ngữ pháp:',
+        options: [
+          'I look forward to hear from you soon.',
+          'I look forward to hearing from you soon.',
+          'I am looking forward hear from you soon.'
+        ],
+        correct: 1,
+        explanation: 'Trong cụm "look forward to", từ "to" là một giới từ, nên động từ theo sau bắt buộc phải thêm "-ing" (hearing).'
+      },
+      {
+        vi: 'Ý muốn nói: "Tôi đã là thành viên của câu lạc bộ được 2 năm rồi."',
+        q: 'Chọn thì của động từ ĐÚNG khi nói về việc kéo dài từ quá khứ đến hiện tại:',
+        options: [
+          'I am a member of the club for two years.',
+          'I have been a member of the club for two years.',
+          'I was a member of the club since two years.'
+        ],
+        correct: 1,
+        explanation: 'Khi có "for + khoảng thời gian" (for two years) hoặc "since + mốc thời gian", hãy dùng thì Hiện tại hoàn thành ("have been") để ăn điểm ngữ pháp B1.'
+      },
+      {
+        vi: 'Ngữ cảnh: Viết Email 4.2 gửi Người quản lý câu lạc bộ (người bạn không biết tên).',
+        q: 'Cặp Mở đầu và Kết thúc thư nào ĐÚNG chuẩn văn phong Trang trọng (Formal Register)?',
+        options: [
+          'Hi Manager, ... See you soon,',
+          'Dear Sir or Madam, ... Yours faithfully,',
+          'Hello Mr. Manager, ... Love,'
+        ],
+        correct: 1,
+        explanation: 'Khi gửi thư trang trọng cho người chưa biết tên, mở đầu chuẩn là "Dear Sir or Madam," và kết thúc là "Yours faithfully," (nếu biết rõ tên như "Dear Mr. Brown," thì kết bằng "Yours sincerely,").'
+      },
+      {
+        vi: 'Ý muốn nói: "Nếu câu lạc bộ dời lịch sang Chủ nhật, nhiều thành viên sẽ có thể tham gia hơn."',
+        q: 'Chọn câu điều kiện loại 1 ĐÚNG ngữ pháp:',
+        options: [
+          'If the club moves the schedule to Sunday, more members will be able to join.',
+          'If the club will move the schedule to Sunday, more members can join.',
+          'If the club move the schedule to Sunday, more members would join.'
+        ],
+        correct: 0,
+        explanation: 'Trong câu điều kiện loại 1: Mệnh đề "If" chia ở Hiện tại đơn ("the club moves" - ngôi thứ 3 số ít thêm -s), mệnh đề chính dùng "will + V nguyên mẫu".'
+      },
+      {
+        vi: 'Ý muốn nói: "Sao tụi mình không đi xe buýt cùng nhau đến buổi triển lãm nhỉ?" (Email 4.1 gửi bạn)',
+        q: 'Chọn câu rủ bạn thân ĐÚNG ngữ pháp và đúng văn phong thân mật:',
+        options: [
+          'Why don\'t we take the bus together to the exhibition?',
+          'Why we don\'t taking the bus together to the exhibition?',
+          'I would like to request you to take the bus with me.'
+        ],
+        correct: 0,
+        explanation: 'Cấu trúc gợi ý thân mật là "Why don\'t we + V nguyên mẫu...?" hoặc "Let\'s + V nguyên mẫu". Phương án 3 quá cứng nhắc khi nói với bạn thân.'
+      }
+    ];
+
+    const CLUB_EXAMS = {
+      travel: {
+        name: 'Travel Club (Câu lạc bộ Du lịch)',
+        p1: [
+          { q: '1. What is your favourite season to travel?', sample: 'Summer' },
+          { q: '2. Who do you usually travel with?', sample: 'My close friends' },
+          { q: '3. How do you usually go to work or school?', sample: 'By motorbike' },
+          { q: '4. What is your favourite food?', sample: 'Vietnamese noodle soup' },
+          { q: '5. What do you like doing in the evening?', sample: 'Reading travel blogs' }
+        ],
+        p2Prompt: 'You are a new member of a Travel Club. Fill in the form. Write in sentences (20–30 words): Why did you decide to join our Travel Club, and how often do you travel?',
+        p2Sample: 'I decided to join the Travel Club because I love exploring new places and making friends. I usually travel with my family twice a year during the summer holidays.',
+        p3: [
+          {
+            q: 'Sam: Hi! Welcome to the club. Can you tell me about the most memorable trip you have ever had?',
+            sample: 'Last summer, I went to Da Nang with my best friends for four days. The beaches were really clean and we took many beautiful photos together. It was the most relaxing holiday I have ever had.'
+          },
+          {
+            q: 'Miguel: Do you prefer travelling alone or travelling in a group? Why?',
+            sample: 'Personally, I prefer travelling in a group with my friends or club members. First, it is much safer and helps us save money on hotel rooms. In addition, we can share fun moments together.'
+          },
+          {
+            q: 'Michelle: Our club is planning a short weekend trip next month. Where do you think we should go and what activities should we do?',
+            sample: 'In my opinion, we should organise a camping trip to Ba Vi National Park. It is quite close to the city, so everyone can travel easily by bus. Moreover, we can have a barbecue and play team games.'
+          }
+        ],
+        p4Context: 'You are a member of the Travel Club. You received this message from the club manager: "Dear members, due to high transport costs, we have decided to cancel our two-day trip to Ha Long Bay next month. Instead, we will hold an online talk about travel tips on Tuesday at 2:00 PM."',
+        p41Prompt: 'Write an email to your friend in the club (40–50 words). Express your feelings about the change and suggest what you two can do together.',
+        p41Sample: 'Hi Minh,\nHave you heard the news from the Travel Club? What a pity! I\'m really disappointed that our trip to Ha Long Bay has been cancelled. Also, I can\'t join the online talk on Tuesday afternoon because I have to work. Why don\'t we ask the manager to move it to the weekend?\nSee you soon,',
+        p42Prompt: 'Write an email to the club manager (120–150 words). Explain how you feel about the cancellation and the new time, and suggest alternative solutions for the club.',
+        p42Sample: 'Dear Sir or Madam,\nI am writing this email with regard to the recent announcement about cancelling our trip to Ha Long Bay and holding an online talk instead. I have been an active member of the Travel Club for over a year.\nTo be honest, I was quite disappointed to hear this news because many members were looking forward to the trip. Although I understand that transport costs are high right now, holding the online talk at 2:00 PM on Tuesday is very inconvenient for members who work full-time or attend university.\nTherefore, I would like to make two suggestions. First, instead of a two-day trip to Ha Long Bay, the club could organise a one-day camping trip near the city to save money. Second, if we hold the online talk, it would be much better to schedule it on Sunday evening so everyone can attend.\nI look forward to hearing from you.\nYours faithfully,\nNguyen An'
+      },
+      book: {
+        name: 'Book Club (Câu lạc bộ Đọc sách)',
+        p1: [
+          { q: '1. What is your favourite day of the week?', sample: 'Sunday' },
+          { q: '2. Where do you usually read books?', sample: 'In my bedroom' },
+          { q: '3. What kind of music do you like?', sample: 'Pop music' },
+          { q: '4. What did you do yesterday evening?', sample: 'Watched a movie' },
+          { q: '5. How many languages can you speak?', sample: 'Two languages' }
+        ],
+        p2Prompt: 'You are a new member of a Book Club. Fill in the form. Write in sentences (20–30 words): Why are you interested in reading, and when do you usually read?',
+        p2Sample: 'I am interested in reading because it helps me broaden my knowledge and relax after stressful working hours. Therefore, I usually spend thirty minutes reading novels before going to bed.',
+        p3: [
+          {
+            q: 'Alex: Welcome! What was the best book you read recently and why did you like it?',
+            sample: 'Last month, I read a famous history book recommended by my teacher. I really enjoyed it because the story was exciting and easy to understand. Moreover, it taught me many meaningful lessons about life.'
+          },
+          {
+            q: 'Sara: Nowadays, many people prefer reading e-books on phones instead of paper books. Which one do you prefer?',
+            sample: 'Although e-books are convenient and cheap, I still prefer reading traditional paper books. Looking at a phone screen for a long time makes my eyes tired. In addition, I love the feeling of holding a real book.'
+          },
+          {
+            q: 'David: Our club wants to encourage more young people to read. What activities should our club organise?',
+            sample: 'In my opinion, the club should organise a monthly book exchange event at a local café. Members can bring their old books and swap them for free. Furthermore, inviting famous authors to share their stories will attract many students.'
+          }
+        ],
+        p4Context: 'You are a member of the Book Club. You received this notice: "Dear members, our club library room will be closed for renovation for three months starting next week. During this time, members cannot borrow paper books, and the monthly fee will increase by 15% to pay for the renovation."',
+        p41Prompt: 'Write an email to your friend in the club (40–50 words). Share your reaction to the notice and suggest what you can do.',
+        p41Sample: 'Hi Lan,\nHave you seen the email from the Book Club? I\'m quite upset that the library is closing for three months and they\'re even raising the monthly fee! Since we can\'t borrow books there, why don\'t we exchange our own books at home and write to the manager together?\nLet me know!',
+        p42Prompt: 'Write an email to the Book Club president (120–150 words). Express your concern about the library closure and the fee increase, and propose practical alternatives.',
+        p42Sample: 'Dear Sir or Madam,\nI am writing with regard to the recent announcement concerning the three-month closure of our club library and the 15% increase in the monthly membership fee.\nWhile I completely agree that renovating the library room will create a better space in the future, I am quite concerned about this decision. Closing the library for three months means members will not receive the main benefit of borrowing paper books. Therefore, increasing the membership fee during this period is unfair and might cause many student members to leave the club.\nI would like to suggest two solutions. First, the club should keep the current membership fee unchanged until the renovation is finished. Second, the club could provide free access to an online e-book collection or organise a weekly book-swapping corner at a local coffee shop.\nThank you for considering my feedback. I look forward to hearing from you.\nYours faithfully,\nTran Minh'
+      },
+      fitness: {
+        name: 'Fitness & Health Club (CLB Thể thao)',
+        p1: [
+          { q: '1. What sport do you like watching?', sample: 'Football' },
+          { q: '2. How often do you do exercise?', sample: 'Three times a week' },
+          { q: '3. What is your favourite healthy drink?', sample: 'Fresh orange juice' },
+          { q: '4. What time do you usually get up?', sample: 'At six o\'clock' },
+          { q: '5. What is the weather like today?', sample: 'Sunny and warm' }
+        ],
+        p2Prompt: 'You have just joined a Fitness Club. Write in sentences (20–30 words): Why did you join the club and what fitness goals do you want to achieve?',
+        p2Sample: 'I decided to join the Fitness Club because I want to keep fit and stay healthy. My main goal is to lose weight and have more energy for work.',
+        p3: [
+          {
+            q: 'Chris: Hi there! Tell me about a sport or physical activity you tried for the first time.',
+            sample: 'Last year, I tried a yoga class for the first time with my sister. At first, the movements were quite difficult for me, so my muscles felt sore. However, after a few weeks, I felt much more flexible and relaxed.'
+          },
+          {
+            q: 'Elena: Why do you think many busy people find it hard to exercise regularly?',
+            sample: 'In my opinion, many people spend eight to ten hours a day working at the office. As a result, they feel too tired to go to the gym in the evening. Moreover, some people lack motivation when they exercise alone.'
+          },
+          {
+            q: 'Marcus: Our club wants to organise an outdoor sports day this summer. What activities should we include?',
+            sample: 'I think we should organise a five-kilometre charity run in the city park on Sunday morning. In addition, we can hold fun team games like tug of war and badminton so members of all ages can take part.'
+          }
+        ],
+        p4Context: 'You are a member of the Fitness Club. The club sent this email: "Dear members, starting next month, all evening fitness classes (from 6:00 PM to 8:00 PM) will be moved to 9:00 AM on weekdays because our main trainer is changing his schedule."',
+        p41Prompt: 'Write an email to your friend in the club (40–50 words). Tell your friend how this change affects you and suggest a plan.',
+        p41Sample: 'Hey Nam,\nHave you heard that our Fitness Club is moving all evening classes to 9:00 AM on weekdays? That\'s terrible news because both of us have to work at the office in the morning! Why don\'t we ask the manager to hire another trainer for the evening classes?\nWrite back soon!',
+        p42Prompt: 'Write an email to the Fitness Club manager (120–150 words). Explain why the new schedule is problematic for members and suggest better solutions.',
+        p42Sample: 'Dear Sir or Madam,\nI am writing this email with regard to the recent notice about moving all evening fitness classes from 6:00 PM to 9:00 AM on weekdays starting next month.\nTo be honest, I was very disappointed to read this announcement. Most members of our club are office workers and university students who are busy working or studying every weekday morning. Therefore, changing the schedule to 9:00 AM will make it impossible for the majority of us to attend the classes.\nI would like to propose two alternative solutions. First, the club could invite a part-time fitness trainer to take charge of the evening sessions from 6:00 PM to 8:00 PM. Second, if that is not possible, could you please move those classes to Saturday and Sunday mornings instead?\nThank you for your attention to this matter. I look forward to hearing from you soon.\nYours faithfully,\nLe Hoang'
+      },
+      photo: {
+        name: 'Photography Club (CLB Nhiếp ảnh)',
+        p1: [
+          { q: '1. Where do you live?', sample: 'In Hanoi' },
+          { q: '2. What do you usually do on Sundays?', sample: 'Take photos in the park' },
+          { q: '3. What is your favourite colour?', sample: 'Dark blue' },
+          { q: '4. Who is your best friend?', sample: 'My classmate Tuan' },
+          { q: '5. How do you go to the city centre?', sample: 'By bus' }
+        ],
+        p2Prompt: 'You are a new member of a Photography Club. Write in sentences (20–30 words): What do you like taking photos of, and why did you join the club?',
+        p2Sample: 'I really love taking photos of nature and street life in my city. I joined the Photography Club because I want to learn professional editing skills and make new friends.',
+        p3: [
+          {
+            q: 'Liam: Welcome to the club! Can you describe your favourite photo that you have taken?',
+            sample: 'My favourite photo is a picture of my family on the beach during sunset last summer. Everyone was smiling happily while the sky turned bright orange. Whenever I look at that photo, I feel very warm and peaceful.'
+          },
+          {
+            q: 'Noah: Do you think people need an expensive camera to take good photos, or is a smartphone enough?',
+            sample: 'In my opinion, a modern smartphone is good enough for beginners to take beautiful photos. It is small and convenient to carry everywhere. However, an expensive camera is still better when taking photos at night.'
+          },
+          {
+            q: 'Sophia: Our club is planning an annual photo exhibition next month. What theme should we choose and how can we attract visitors?',
+            sample: 'I think we should choose the theme "Beauty of Daily Life" because all members have photos on this topic. To attract more visitors, we should promote the exhibition on social media and offer free entry for everyone.'
+          }
+        ],
+        p4Context: 'You are a member of the Photography Club. You received an email: "Dear members, for our annual photo competition next month, only photos taken with professional DSLR cameras will be accepted. Smartphone photos are no longer allowed, and each member must pay a $20 entry fee."',
+        p41Prompt: 'Write an email to your friend in the club (40–50 words). Share your feelings about the new rules and suggest what to do.',
+        p41Sample: 'Hi Linh,\nHave you read the new rules for next month\'s photo competition? It\'s such a shame that they banned smartphone photos and added a $20 entry fee! Since we both take pictures with our phones, we can\'t join now. Let\'s email the club manager to ask for a smartphone category!\nBest,',
+        p42Prompt: 'Write an email to the Photography Club committee (120–150 words). Explain your opinion on the new competition rules and suggest fairer options.',
+        p42Sample: 'Dear Sir or Madam,\nI am writing with regard to the recent announcement concerning the new rules and entry fee for our annual photo competition next month.\nAs an enthusiastic member of the Photography Club, I was quite disappointed to learn that smartphone photos are no longer accepted and that participants must pay a twenty-dollar fee. Many young members in our club are students who cannot afford expensive professional cameras. Excluding smartphone photography and charging a high fee will discourage talented beginners from participating.\nTherefore, I would like to suggest dividing the competition into two separate categories: one for professional cameras and another for smartphones. In addition, it would be much fairer if the entry fee could be reduced to five dollars so that all members have an equal opportunity to showcase their work.\nThank you for considering my suggestions. I look forward to your reply.\nYours faithfully,\nPham Hoa'
+      }
+    };
+
+    // ==================== APPLICATION STATE ====================
+    let activeTab = 'builder';
+    let currentScenarioIndex = 0;
+    let selectedStep1 = 0;
+    let selectedStep2 = 0;
+    let selectedStep3 = 0;
+
+    let currentVocabCat = 'all';
+    let currentCardIdx = 0;
+    let masteredIds = [];
+
+    let currentQuizIdx = 0;
+    let quizAnswers = {}; // { idx: chosenOptionIndex }
+
+    let savedSentences = [
+      {
+        en: 'I decided to join this club because I want to broaden my knowledge and make friends with people who share the same interest.',
+        vi: 'Tôi quyết định tham gia CLB này vì tôi muốn mở rộng kiến thức và kết bạn với những người có cùng sở thích.',
+        tag: 'Part 2 & 3'
+      }
+    ];
+
+    let timerSeconds = 50 * 60;
+    let timerInterval = null;
+    let timerRunning = false;
+
+    // Load persisted state safely
+    try {
+      const savedM = localStorage.getItem('aptis_b1_mastered');
+      if (savedM) masteredIds = JSON.parse(savedM);
+      const savedS = localStorage.getItem('aptis_b1_sentences');
+      if (savedS) savedSentences = JSON.parse(savedS);
+    } catch (e) {
+      // Ignore storage errors in sandboxed iframe
+    }
+
+    function saveState() {
+      try {
+        localStorage.setItem('aptis_b1_mastered', JSON.stringify(masteredIds));
+        localStorage.setItem('aptis_b1_sentences', JSON.stringify(savedSentences));
+      } catch (e) {}
+    }
+
+    function showToast(msg) {
+      const banner = document.getElementById('toastBanner');
+      const text = document.getElementById('toastText');
+      text.textContent = msg;
+      banner.classList.remove('hidden');
+      setTimeout(() => {
+        banner.classList.add('hidden');
+      }, 2400);
+    }
+
+    function countWords(str) {
+      if (!str || !str.trim()) return 0;
+      return str.trim().split(/\s+/).length;
+    }
+
+    function copyTextToClipboard(text) {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(() => {
+          showToast('Đã copy vào bộ nhớ tạm!');
+        }).catch(() => fallbackCopy(text));
+      } else {
+        fallbackCopy(text);
+      }
+    }
+
+    function fallbackCopy(text) {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      document.body.appendChild(ta);
+      ta.select();
+      try {
+        document.execCommand('copy');
+        showToast('Đã copy vào bộ nhớ tạm!');
+      } catch (e) {
+        showToast('Hãy bôi đen và nhấn Ctrl+C để copy.');
+      }
+      document.body.removeChild(ta);
+    }
+
+    function updateHeaderCounters() {
+      document.getElementById('headerMasteredCount').textContent = `${masteredIds.length}/${VOCAB_CARDS.length}`;
+      let correctCount = 0;
+      Object.keys(quizAnswers).forEach(k => {
+        const qIdx = parseInt(k, 10);
+        if (quizAnswers[qIdx] === GRAMMAR_QUIZ[qIdx].correct) correctCount++;
+      });
+      document.getElementById('headerQuizScore').textContent = `${correctCount}/${GRAMMAR_QUIZ.length}`;
+      document.getElementById('headerSavedCount').textContent = `${savedSentences.length}`;
+    }
+
+    // ==================== NAVIGATION ====================
+    function switchTab(tabName) {
+      activeTab = tabName;
+      const views = {
+        builder: document.getElementById('viewBuilder'),
+        vocab: document.getElementById('viewVocab'),
+        simulator: document.getElementById('viewSimulator'),
+        notebook: document.getElementById('viewNotebook')
+      };
+      const btns = {
+        builder: document.getElementById('tabBtnBuilder'),
+        vocab: document.getElementById('tabBtnVocab'),
+        simulator: document.getElementById('tabBtnSimulator'),
+        notebook: document.getElementById('tabBtnNotebook')
+      };
+
+      Object.keys(views).forEach(k => {
+        if (k === tabName) {
+          views[k].classList.remove('hidden');
+          btns[k].className = 'nav-tab-btn px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold transition flex items-center gap-2 bg-white text-indigo-950 shadow-sm whitespace-nowrap';
+        } else {
+          views[k].classList.add('hidden');
+          btns[k].className = 'nav-tab-btn px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold transition flex items-center gap-2 text-indigo-100 hover:bg-indigo-800/60 whitespace-nowrap';
+        }
+      });
+
+      if (tabName === 'simulator') {
+        analyzeSimulatorWriting();
+      } else if (tabName === 'notebook') {
+        renderSavedSentences();
+      }
+    }
+
+    // ==================== TAB 1: BUILDER LOGIC ====================
+    function renderScenarioButtons() {
+      const container = document.getElementById('scenarioButtonsContainer');
+      container.innerHTML = '';
+      BUILDER_SCENARIOS.forEach((sc, idx) => {
+        const isSelected = idx === currentScenarioIndex;
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = isSelected
+          ? 'text-left p-3 rounded-xl border-2 border-indigo-600 bg-indigo-50/70 transition shadow-sm'
+          : 'text-left p-3 rounded-xl border border-slate-200 hover:border-indigo-300 bg-slate-50/60 transition';
+        btn.innerHTML = `
+          <div class="text-[11px] font-bold uppercase tracking-wider ${isSelected ? 'text-indigo-600' : 'text-slate-400'}">${sc.partBadge}</div>
+          <div class="text-xs sm:text-sm font-bold text-slate-900 mt-0.5">${sc.shortLabel}</div>
+        `;
+        btn.addEventListener('click', () => {
+          currentScenarioIndex = idx;
+          selectedStep1 = 0;
+          selectedStep2 = 0;
+          selectedStep3 = 0;
+          renderScenarioButtons();
+          renderBuilderSteps();
+        });
+        container.appendChild(btn);
+      });
+    }
+
+    function renderBuilderSteps() {
+      const sc = BUILDER_SCENARIOS[currentScenarioIndex];
+      document.getElementById('builderPartBadge').textContent = sc.partBadge;
+      document.getElementById('builderScenarioTitle').textContent = sc.title;
+      document.getElementById('builderBadExample').textContent = sc.badExample;
+      document.getElementById('builderBadReason').textContent = sc.badReason;
+      document.getElementById('builderGrammarPoint').textContent = sc.grammarPoint;
+
+      const renderOptionGroup = (containerId, items, selectedIdx, onSelect, activeColorClass) => {
+        const el = document.getElementById(containerId);
+        el.innerHTML = '';
+        items.forEach((item, idx) => {
+          const active = idx === selectedIdx;
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = active
+            ? `text-left p-3 rounded-xl border-2 ${activeColorClass} transition shadow-sm`
+            : 'text-left p-3 rounded-xl border border-slate-200 hover:border-slate-300 bg-slate-50/50 transition';
+          btn.innerHTML = `
+            <div class="text-xs sm:text-sm font-bold text-slate-900">${item.en}</div>
+            <div class="text-[11px] text-slate-500 mt-0.5">${item.vi}</div>
+          `;
+          btn.addEventListener('click', () => onSelect(idx));
+          el.appendChild(btn);
+        });
+      };
+
+      renderOptionGroup('step1Options', sc.step1, selectedStep1, (idx) => {
+        selectedStep1 = idx;
+        renderBuilderSteps();
+      }, 'border-indigo-600 bg-indigo-50/60');
+
+      renderOptionGroup('step2Options', sc.step2, selectedStep2, (idx) => {
+        selectedStep2 = idx;
+        renderBuilderSteps();
+      }, 'border-emerald-600 bg-emerald-50/60');
+
+      renderOptionGroup('step3Options', sc.step3, selectedStep3, (idx) => {
+        selectedStep3 = idx;
+        renderBuilderSteps();
+      }, 'border-amber-500 bg-amber-50/60');
+
+      updateAssembledOutput();
+    }
+
+    function updateAssembledOutput() {
+      const sc = BUILDER_SCENARIOS[currentScenarioIndex];
+      const p1 = sc.step1[selectedStep1];
+      const p2 = sc.step2[selectedStep2];
+      const p3 = sc.step3[selectedStep3];
+
+      const fullEn = `${p1.en} ${p2.en} ${p3.en}`;
+      const fullVi = `${p1.vi.replace(/\.\.\.$/, '')} ${p2.vi} ${p3.vi}`;
+
+      document.getElementById('assembledEnglishText').textContent = fullEn;
+      document.getElementById('assembledVietnameseMeaning').textContent = `Nghĩa: "${fullVi}"`;
+      document.getElementById('customSentenceInput').value = fullEn;
+      const wc = countWords(fullEn);
+      document.getElementById('assembledWordCount').textContent = `${wc} từ (Chuẩn độ dài Part 2–3)`;
+    }
+
+    // ==================== TAB 2: VOCAB & GRAMMAR LOGIC ====================
+    function getFilteredVocab() {
+      if (currentVocabCat === 'all') return VOCAB_CARDS;
+      return VOCAB_CARDS.filter(c => c.cat === currentVocabCat);
+    }
+
+    function renderVocabSection() {
+      const filtered = getFilteredVocab();
+      if (currentCardIdx >= filtered.length) currentCardIdx = 0;
+      const card = filtered[currentCardIdx];
+
+      const catNames = {
+        benefit: 'Lợi ích & Sở thích (Part 2 & 3)',
+        linker: 'Từ nối ăn điểm Cohesion (Part 2, 3, 4)',
+        informal: 'Email Thân mật (Part 4.1)',
+        formal: 'Email Trang trọng (Part 4.2)'
+      };
+
+      document.getElementById('flashcardCounterBadge').textContent = `Thẻ ${currentCardIdx + 1} / ${filtered.length}`;
+      document.getElementById('fcCategoryTag').textContent = catNames[card.cat] || '';
+      document.getElementById('fcPhrase').textContent = card.phrase;
+      document.getElementById('fcMeaning').textContent = `Nghĩa: ${card.meaning}`;
+      document.getElementById('fcExample').textContent = `"${card.example}"`;
+      document.getElementById('fcNote').textContent = `💡 Mẹo phòng thi: ${card.note}`;
+
+      const isMastered = masteredIds.includes(card.id);
+      const masteredTag = document.getElementById('fcMasteredTag');
+      const toggleBtn = document.getElementById('btnToggleMastered');
+      if (isMastered) {
+        masteredTag.textContent = '✅ Đã thuộc cụm này';
+        masteredTag.className = 'font-bold text-emerald-600';
+        toggleBtn.textContent = 'Bỏ đánh dấu thuộc';
+        toggleBtn.className = 'px-3.5 py-2 rounded-xl bg-slate-200 hover:bg-slate-300 text-slate-800 text-xs font-semibold transition';
+      } else {
+        masteredTag.textContent = 'Chưa đánh dấu thuộc';
+        masteredTag.className = 'font-semibold text-slate-400';
+        toggleBtn.textContent = '✓ Đánh dấu Đã thuộc';
+        toggleBtn.className = 'px-3.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold transition';
+      }
+
+      // Render quick list
+      const qList = document.getElementById('vocabQuickList');
+      qList.innerHTML = '';
+      filtered.forEach((item, idx) => {
+        const done = masteredIds.includes(item.id);
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = idx === currentCardIdx
+          ? 'text-left px-3 py-2 rounded-lg border border-indigo-600 bg-indigo-50 text-xs font-bold text-indigo-900 flex items-center justify-between'
+          : 'text-left px-3 py-2 rounded-lg border border-slate-200 hover:bg-slate-50 text-xs font-medium text-slate-700 flex items-center justify-between';
+        btn.innerHTML = `
+          <span class="truncate pr-2">${item.phrase}</span>
+          <span>${done ? '✅' : ''}</span>
+        `;
+        btn.addEventListener('click', () => {
+          currentCardIdx = idx;
+          renderVocabSection();
+        });
+        qList.appendChild(btn);
+      });
+
+      updateHeaderCounters();
+    }
+
+    function renderQuizQuestion() {
+      const qObj = GRAMMAR_QUIZ[currentQuizIdx];
+      document.getElementById('quizQuestionNumber').textContent = `Câu ${currentQuizIdx + 1} / ${GRAMMAR_QUIZ.length}`;
+      document.getElementById('quizVietnamesePrompt').textContent = qObj.vi;
+      document.getElementById('quizQuestionText').textContent = qObj.q;
+
+      const optContainer = document.getElementById('quizOptionsContainer');
+      optContainer.innerHTML = '';
+      const chosen = quizAnswers[currentQuizIdx];
+
+      qObj.options.forEach((optText, oIdx) => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        let cls = 'w-full text-left p-3 rounded-xl border border-slate-300 bg-white hover:border-indigo-400 text-xs sm:text-sm font-medium text-slate-800 transition flex items-center justify-between';
+        let icon = '';
+
+        if (chosen !== undefined) {
+          if (oIdx === qObj.correct) {
+            cls = 'w-full text-left p-3 rounded-xl border-2 border-emerald-600 bg-emerald-50 text-xs sm:text-sm font-bold text-emerald-950 flex items-center justify-between';
+            icon = '✅ Đúng';
+          } else if (oIdx === chosen && chosen !== qObj.correct) {
+            cls = 'w-full text-left p-3 rounded-xl border-2 border-rose-500 bg-rose-50 text-xs sm:text-sm font-semibold text-rose-900 flex items-center justify-between';
+            icon = '❌ Sai';
+          }
+        }
+
+        btn.className = cls;
+        btn.innerHTML = `<span>${optText}</span><span class="text-xs shrink-0 ml-2">${icon}</span>`;
+        btn.addEventListener('click', () => {
+          quizAnswers[currentQuizIdx] = oIdx;
+          renderQuizQuestion();
+          updateHeaderCounters();
+        });
+        optContainer.appendChild(btn);
+      });
+
+      const fbBox = document.getElementById('quizFeedbackBox');
+      if (chosen !== undefined) {
+        fbBox.classList.remove('hidden');
+        const isCorrect = chosen === qObj.correct;
+        fbBox.className = isCorrect
+          ? 'p-3.5 rounded-xl text-xs space-y-1 bg-emerald-100/80 border border-emerald-300 text-emerald-950'
+          : 'p-3.5 rounded-xl text-xs space-y-1 bg-amber-100/90 border border-amber-300 text-amber-950';
+        fbBox.innerHTML = `
+          <div class="font-bold">${isCorrect ? '🎉 Chính xác!' : '💡 Lưu ý sửa lỗi:'}</div>
+          <p>${qObj.explanation}</p>
+        `;
+      } else {
+        fbBox.classList.add('hidden');
+      }
+    }
+
+    // ==================== TAB 3: SIMULATOR & SCORER LOGIC ====================
+    function loadClubExam(clubKey, fillSample = false) {
+      const exam = CLUB_EXAMS[clubKey];
+      if (!exam) return;
+
+      // Part 1
+      const p1Container = document.getElementById('simPart1Container');
+      p1Container.innerHTML = '';
+      exam.p1.forEach((item, idx) => {
+        const wrap = document.createElement('div');
+        wrap.className = 'p-3 rounded-xl bg-slate-50 border border-slate-200 space-y-1.5';
+        const val = fillSample ? item.sample : '';
+        wrap.innerHTML = `
+          <div class="flex items-center justify-between text-xs">
+            <label for="simP1Q${idx}" class="font-semibold text-slate-700">${item.q}</label>
+            <span id="simP1Badge${idx}" class="text-[11px] font-bold text-slate-400">0 từ</span>
+          </div>
+          <input id="simP1Q${idx}" type="text" value="${val.replace(/"/g, '&quot;')}" placeholder="1–5 từ (VD: ${item.sample})" class="sim-p1-input w-full rounded-lg border border-slate-300 px-3 py-1.5 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+        `;
+        p1Container.appendChild(wrap);
+      });
+
+      // Attach listeners to Part 1 inputs
+      document.querySelectorAll('.sim-p1-input').forEach((inp, idx) => {
+        inp.addEventListener('input', () => {
+          updatePart1Badge(idx, inp.value);
+          analyzeSimulatorWriting();
+        });
+        updatePart1Badge(idx, inp.value);
+      });
+
+      // Part 2
+      document.getElementById('simPart2Prompt').textContent = exam.p2Prompt;
+      const p2Input = document.getElementById('simPart2Input');
+      p2Input.value = fillSample ? exam.p2Sample : '';
+
+      // Part 3
+      const p3Container = document.getElementById('simPart3Container');
+      p3Container.innerHTML = '';
+      exam.p3.forEach((item, idx) => {
+        const wrap = document.createElement('div');
+        wrap.className = 'p-3.5 rounded-xl bg-slate-50 border border-slate-200 space-y-2';
+        const val = fillSample ? item.sample : '';
+        wrap.innerHTML = `
+          <div class="flex flex-wrap items-center justify-between gap-2">
+            <span class="text-xs sm:text-sm font-bold text-slate-800">${item.q}</span>
+            <span id="simP3Badge${idx}" class="text-xs font-bold px-2.5 py-0.5 rounded-full bg-slate-200 text-slate-700 shrink-0">0 / 30–40 từ</span>
+          </div>
+          <textarea id="simP3Q${idx}" rows="3" placeholder="Viết khoảng 3 câu (30–40 từ): Trả lời trực tiếp + Giải thích lý do + Mở rộng..." class="sim-p3-input w-full rounded-xl border border-slate-300 p-2.5 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">${val}</textarea>
+        `;
+        p3Container.appendChild(wrap);
+      });
+
+      document.querySelectorAll('.sim-p3-input').forEach((ta, idx) => {
+        ta.addEventListener('input', () => {
+          updateWordRangeBadge(`simP3Badge${idx}`, countWords(ta.value), 30, 40);
+          analyzeSimulatorWriting();
+        });
+        updateWordRangeBadge(`simP3Badge${idx}`, countWords(ta.value), 30, 40);
+      });
+
+      // Part 4
+      document.getElementById('simPart4Context').textContent = exam.p4Context;
+      document.getElementById('simPart41Prompt').textContent = exam.p41Prompt;
+      document.getElementById('simPart42Prompt').textContent = exam.p42Prompt;
+
+      const p41Input = document.getElementById('simPart41Input');
+      const p42Input = document.getElementById('simPart42Input');
+      p41Input.value = fillSample ? exam.p41Sample : '';
+      p42Input.value = fillSample ? exam.p42Sample : '';
+
+      updateWordRangeBadge('p2WordBadge', countWords(p2Input.value), 20, 30);
+      updateWordRangeBadge('p41WordBadge', countWords(p41Input.value), 40, 50);
+      updateWordRangeBadge('p42WordBadge', countWords(p42Input.value), 120, 150);
+
+      analyzeSimulatorWriting();
+    }
+
+    function updatePart1Badge(idx, val) {
+      const badge = document.getElementById(`simP1Badge${idx}`);
+      if (!badge) return;
+      const wc = countWords(val);
+      badge.textContent = `${wc} từ`;
+      if (wc >= 1 && wc <= 6) {
+        badge.className = 'text-[11px] font-bold text-emerald-600';
+      } else if (wc > 6) {
+        badge.className = 'text-[11px] font-bold text-amber-600';
+      } else {
+        badge.className = 'text-[11px] font-bold text-slate-400';
+      }
+    }
+
+    function updateWordRangeBadge(badgeId, wc, minW, maxW) {
+      const badge = document.getElementById(badgeId);
+      if (!badge) return;
+      badge.textContent = `${wc} / ${minW}–${maxW} từ`;
+      if (wc === 0) {
+        badge.className = 'text-xs font-bold px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600';
+      } else if (wc >= minW - 3 && wc <= maxW + 5) {
+        badge.className = 'text-xs font-bold px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-300';
+      } else if (wc < minW - 3) {
+        badge.className = 'text-xs font-bold px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-800 border border-amber-300';
+      } else {
+        badge.className = 'text-xs font-bold px-2.5 py-0.5 rounded-full bg-rose-100 text-rose-800 border border-rose-300';
+      }
+    }
+
+    function analyzeSimulatorWriting() {
+      // Check Part 1
+      let p1Filled = 0;
+      document.querySelectorAll('.sim-p1-input').forEach(inp => {
+        if (countWords(inp.value) >= 1) p1Filled++;
+      });
+
+      // Check Part 2
+      const p2Text = document.getElementById('simPart2Input').value;
+      const p2Wc = countWords(p2Text);
+
+      // Check Part 3
+      let p3ValidCount = 0;
+      let allTextCombined = p2Text + ' ';
+      document.querySelectorAll('.sim-p3-input').forEach(ta => {
+        const w = countWords(ta.value);
+        if (w >= 20) p3ValidCount++;
+        allTextCombined += ta.value + ' ';
+      });
+
+      // Check Part 4
+      const p41Text = document.getElementById('simPart41Input').value;
+      const p42Text = document.getElementById('simPart42Input').value;
+      const p41Wc = countWords(p41Text);
+      const p42Wc = countWords(p42Text);
+      allTextCombined += p41Text + ' ' + p42Text;
+
+      // Check Linkers (Cohesive devices)
+      const linkerRegex = /\b(because|however|therefore|in addition|moreover|furthermore|although|first|second|for example|so|also|as a result)\b/gi;
+      const foundLinkers = allTextCombined.match(linkerRegex) || [];
+      const uniqueLinkers = [...new Set(foundLinkers.map(x => x.toLowerCase()))];
+
+      // Check Register contrast in Part 4
+      const hasInformalGreeting = /\b(hi|hey|hello)\b/i.test(p41Text);
+      const hasContractionP41 = /\b(i'm|don't|can't|won't|it's|let's|that's|they're|we're|haven't)\b/i.test(p41Text);
+      const hasFormalGreeting = /\b(dear sir|dear madam|dear mr|dear ms|dear club|dear manager)\b/i.test(p42Text);
+      const hasContractionP42 = /\b(i'm|don't|can't|won't|it's|let's|that's|they're|we're|didn't)\b/i.test(p42Text);
+      const hasFormalClosing = /\b(yours faithfully|yours sincerely|look forward to hearing)\b/i.test(p42Text);
+
+      const checks = [
+        {
+          ok: p1Filled === 5,
+          text: `Part 1: Đã trả lời ${p1Filled}/5 câu ngắn.`
+        },
+        {
+          ok: p2Wc >= 18 && p2Wc <= 35,
+          text: `Part 2: Độ dài ${p2Wc} từ (${p2Wc >= 18 && p2Wc <= 35 ? 'Đạt chuẩn 20–30 từ' : 'Cần viết khoảng 20–30 từ'}).`
+        },
+        {
+          ok: p3ValidCount === 3,
+          text: `Part 3: Đã trả lời đủ độ dài ${p3ValidCount}/3 câu hỏi.`
+        },
+        {
+          ok: uniqueLinkers.length >= 3,
+          text: `Từ nối (Cohesion): Đã dùng ${uniqueLinkers.length} loại từ nối (${uniqueLinkers.slice(0, 5).join(', ') || 'chưa có'}).`
+        },
+        {
+          ok: hasInformalGreeting && hasContractionP41 && p41Wc >= 35,
+          text: `Email 4.1 (Thân mật): ${hasInformalGreeting && hasContractionP41 ? 'Đúng văn phong thân mật & có viết tắt' : 'Nên có Hi/Hey và từ viết tắt (I\'m, don\'t, Let\'s)'}.`
+        },
+        {
+          ok: hasFormalGreeting && !hasContractionP42 && hasFormalClosing && p42Wc >= 100,
+          text: `Email 4.2 (Trang trọng): ${hasContractionP42 ? '⚠️ Đang bị lẫn từ viết tắt (don\'t/I\'m)!' : (hasFormalGreeting && hasFormalClosing ? 'Chuẩn văn phong Formal (Dear... / Yours...)' : 'Cần có Dear Sir or Madam & Yours faithfully')}.`
+        }
+      ];
+
+      const listEl = document.getElementById('autoCheckList');
+      listEl.innerHTML = '';
+      checks.forEach(c => {
+        const div = document.createElement('div');
+        div.className = c.ok
+          ? 'p-2 rounded-lg bg-emerald-50 border border-emerald-200 text-emerald-900 flex items-start gap-2'
+          : 'p-2 rounded-lg bg-amber-50 border border-amber-200 text-amber-900 flex items-start gap-2';
+        div.innerHTML = `<span>${c.ok ? '✅' : '⚠️'}</span><span>${c.text}</span>`;
+        listEl.appendChild(div);
+      });
+
+      calculateCefrFromSliders();
+    }
+
+    function calculateCefrFromSliders() {
+      const s1 = parseInt(document.getElementById('rngScoreP1').value, 10);
+      const s2 = parseInt(document.getElementById('rngScoreP2').value, 10);
+      const s3 = parseInt(document.getElementById('rngScoreP3').value, 10);
+      const s4 = parseInt(document.getElementById('rngScoreP4').value, 10);
+      const coreBoost = document.getElementById('chkCoreBoost').checked;
+
+      document.getElementById('lblScoreP1').textContent = `${s1} / 3`;
+      document.getElementById('lblScoreP2').textContent = `${s2} / 5`;
+      document.getElementById('lblScoreP3').textContent = `${s3} / 5`;
+      document.getElementById('lblScoreP4').textContent = `${s4} / 6`;
+
+      const rawTotal = s1 + s2 + s3 + s4; // 0 to 19
+      const scaleScore = Math.round((rawTotal / 19) * 50);
+
+      document.getElementById('estScaleScore').textContent = `${scaleScore} / 50`;
+      document.getElementById('estRawScore').textContent = `(${rawTotal}/19 điểm thô)`;
+
+      const badge = document.getElementById('estCefrBadge');
+      let cefr = 'A0';
+      let badgeCls = 'inline-block mt-1 px-3 py-1 rounded-lg font-bold text-xs sm:text-sm bg-slate-700 text-slate-200';
+
+      if (scaleScore >= 48) {
+        cefr = 'Mức C (≥ 48)';
+        badgeCls = 'inline-block mt-1 px-3 py-1 rounded-lg font-bold text-xs sm:text-sm bg-purple-500 text-white';
+      } else if (scaleScore >= 40) {
+        cefr = 'Đạt B2 (40–47)';
+        badgeCls = 'inline-block mt-1 px-3 py-1 rounded-lg font-bold text-xs sm:text-sm bg-indigo-500 text-white';
+      } else if (scaleScore >= 26) {
+        cefr = 'Đạt B1 (26–39)';
+        badgeCls = 'inline-block mt-1 px-3 py-1 rounded-lg font-bold text-xs sm:text-sm bg-emerald-500 text-slate-950';
+      } else if (scaleScore >= 24 && coreBoost) {
+        cefr = 'Đạt B1 (Nhờ Core Boost)';
+        badgeCls = 'inline-block mt-1 px-3 py-1 rounded-lg font-bold text-xs sm:text-sm bg-teal-400 text-slate-950';
+      } else if (scaleScore >= 18) {
+        cefr = 'Mức A2 (18–25)';
+        badgeCls = 'inline-block mt-1 px-3 py-1 rounded-lg font-bold text-xs sm:text-sm bg-amber-400 text-slate-950';
+      } else if (scaleScore >= 6) {
+        cefr = 'Mức A1 (6–17)';
+        badgeCls = 'inline-block mt-1 px-3 py-1 rounded-lg font-bold text-xs sm:text-sm bg-rose-500 text-white';
+      }
+
+      badge.textContent = cefr;
+      badge.className = badgeCls;
+    }
+
+    // ==================== TAB 4: SAVED NOTEBOOK ====================
+    function renderSavedSentences() {
+      const container = document.getElementById('savedSentencesList');
+      container.innerHTML = '';
+      if (savedSentences.length === 0) {
+        container.innerHTML = `
+          <div class="p-6 text-center rounded-xl bg-slate-50 border border-dashed border-slate-300 text-xs text-slate-500">
+            Chưa có câu nào được lưu. Hãy sang tab <strong>1. Xưởng Ráp Câu Từ Ý Tưởng</strong> và bấm "Lưu Vào Sổ Tay Câu B1"!
+          </div>
+        `;
+        return;
+      }
+
+      savedSentences.forEach((item, idx) => {
+        const card = document.createElement('div');
+        card.className = 'p-3.5 rounded-xl bg-slate-50 border border-slate-200 space-y-1.5';
+        card.innerHTML = `
+          <div class="flex items-center justify-between text-xs">
+            <span class="font-bold text-indigo-700 bg-indigo-50 px-2 py-0.5 rounded">${item.tag || 'Câu B1'}</span>
+            <div class="flex items-center gap-2">
+              <button type="button" data-copy-idx="${idx}" class="btn-copy-saved text-slate-600 hover:text-indigo-600 font-semibold">Copy</button>
+              <button type="button" data-del-idx="${idx}" class="btn-del-saved text-rose-500 hover:text-rose-700 font-semibold">Xóa</button>
+            </div>
+          </div>
+          <p class="text-xs sm:text-sm font-semibold text-slate-900">${item.en}</p>
+          <p class="text-xs text-slate-500 italic">${item.vi || ''}</p>
+        `;
+        container.appendChild(card);
+      });
+
+      container.querySelectorAll('.btn-copy-saved').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const i = parseInt(btn.getAttribute('data-copy-idx'), 10);
+          copyTextToClipboard(savedSentences[i].en);
+        });
+      });
+
+      container.querySelectorAll('.btn-del-saved').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const i = parseInt(btn.getAttribute('data-del-idx'), 10);
+          savedSentences.splice(i, 1);
+          saveState();
+          renderSavedSentences();
+          updateHeaderCounters();
+        });
+      });
+    }
+
+    // ==================== TIMER LOGIC ====================
+    function formatTimer(sec) {
+      const m = Math.floor(sec / 60);
+      const s = sec % 60;
+      return `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+    }
+
+    function toggleTimer() {
+      const btn = document.getElementById('btnToggleTimer');
+      if (timerRunning) {
+        clearInterval(timerInterval);
+        timerRunning = false;
+        btn.textContent = 'Tiếp tục';
+      } else {
+        clearInterval(timerInterval);
+        timerRunning = true;
+        btn.textContent = 'Tạm dừng';
+        timerInterval = setInterval(() => {
+          if (timerSeconds > 0) {
+            timerSeconds--;
+            document.getElementById('simTimerDisplay').textContent = formatTimer(timerSeconds);
+          } else {
+            clearInterval(timerInterval);
+            timerRunning = false;
+            btn.textContent = 'Bắt đầu';
+            showToast('⏰ Đã hết 50 phút làm bài!');
+          }
+        }, 1000);
+      }
+    }
+
+    function resetTimer() {
+      clearInterval(timerInterval);
+      timerRunning = false;
+      timerSeconds = 50 * 60;
+      document.getElementById('simTimerDisplay').textContent = formatTimer(timerSeconds);
+      document.getElementById('btnToggleTimer').textContent = 'Bắt đầu';
+    }
+
+    // ==================== INITIALIZATION & EVENT LISTENERS ====================
+    window.addEventListener('DOMContentLoaded', () => {
+      // Navigation tabs
+      document.getElementById('tabBtnBuilder').addEventListener('click', () => switchTab('builder'));
+      document.getElementById('tabBtnVocab').addEventListener('click', () => switchTab('vocab'));
+      document.getElementById('tabBtnSimulator').addEventListener('click', () => switchTab('simulator'));
+      document.getElementById('tabBtnNotebook').addEventListener('click', () => switchTab('notebook'));
+
+      // Tab 1 events
+      document.getElementById('btnRandomIdea').addEventListener('click', () => {
+        currentScenarioIndex = (currentScenarioIndex + 1) % BUILDER_SCENARIOS.length;
+        const sc = BUILDER_SCENARIOS[currentScenarioIndex];
+        selectedStep1 = Math.floor(Math.random() * sc.step1.length);
+        selectedStep2 = Math.floor(Math.random() * sc.step2.length);
+        selectedStep3 = Math.floor(Math.random() * sc.step3.length);
+        renderScenarioButtons();
+        renderBuilderSteps();
+        showToast(`Đã chuyển sang: ${sc.shortLabel}`);
+      });
+
+      document.getElementById('btnSaveSentence').addEventListener('click', () => {
+        const val = document.getElementById('customSentenceInput').value.trim();
+        if (!val) return;
+        const sc = BUILDER_SCENARIOS[currentScenarioIndex];
+        savedSentences.unshift({
+          en: val,
+          vi: document.getElementById('assembledVietnameseMeaning').textContent,
+          tag: sc.partBadge
+        });
+        saveState();
+        updateHeaderCounters();
+        showToast('Đã lưu câu vào Sổ Tay Câu B1!');
+      });
+
+      document.getElementById('btnCopySentence').addEventListener('click', () => {
+        const val = document.getElementById('customSentenceInput').value.trim();
+        copyTextToClipboard(val);
+      });
+
+      // Tab 2 events
+      document.querySelectorAll('.vocab-cat-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          currentVocabCat = btn.getAttribute('data-cat');
+          currentCardIdx = 0;
+          document.querySelectorAll('.vocab-cat-btn').forEach(b => {
+            b.className = b === btn
+              ? 'vocab-cat-btn text-xs font-semibold px-3 py-1.5 rounded-lg bg-indigo-600 text-white'
+              : 'vocab-cat-btn text-xs font-semibold px-3 py-1.5 rounded-lg bg-slate-100 text-slate-700 hover:bg-slate-200';
+          });
+          renderVocabSection();
+        });
+      });
+
+      document.getElementById('btnPrevCard').addEventListener('click', () => {
+        const filtered = getFilteredVocab();
+        currentCardIdx = (currentCardIdx - 1 + filtered.length) % filtered.length;
+        renderVocabSection();
+      });
+
+      document.getElementById('btnNextCard').addEventListener('click', () => {
+        const filtered = getFilteredVocab();
+        currentCardIdx = (currentCardIdx + 1) % filtered.length;
+        renderVocabSection();
+      });
+
+      document.getElementById('btnToggleMastered').addEventListener('click', () => {
+        const filtered = getFilteredVocab();
+        const card = filtered[currentCardIdx];
+        const idx = masteredIds.indexOf(card.id);
+        if (idx === -1) {
+          masteredIds.push(card.id);
+          showToast(`Đã thuộc cụm: "${card.phrase}"`);
+        } else {
+          masteredIds.splice(idx, 1);
+        }
+        saveState();
+        renderVocabSection();
+      });
+
+      document.getElementById('btnPrevQuiz').addEventListener('click', () => {
+        currentQuizIdx = (currentQuizIdx - 1 + GRAMMAR_QUIZ.length) % GRAMMAR_QUIZ.length;
+        renderQuizQuestion();
+      });
+
+      document.getElementById('btnNextQuiz').addEventListener('click', () => {
+        currentQuizIdx = (currentQuizIdx + 1) % GRAMMAR_QUIZ.length;
+        renderQuizQuestion();
+      });
+
+      document.getElementById('btnResetQuiz').addEventListener('click', () => {
+        quizAnswers = {};
+        currentQuizIdx = 0;
+        renderQuizQuestion();
+        updateHeaderCounters();
+        showToast('Đã làm mới bài trắc nghiệm ngữ pháp!');
+      });
+
+      // Tab 3 events
+      document.getElementById('simClubSelect').addEventListener('change', (e) => {
+        loadClubExam(e.target.value, false);
+        showToast('Đã đổi đề thi Câu lạc bộ!');
+      });
+
+      document.getElementById('btnLoadSampleAnswers').addEventListener('click', () => {
+        const clubKey = document.getElementById('simClubSelect').value;
+        loadClubExam(clubKey, true);
+        document.getElementById('rngScoreP1').value = 3;
+        document.getElementById('rngScoreP2').value = 5;
+        document.getElementById('rngScoreP3').value = 4;
+        document.getElementById('rngScoreP4').value = 3;
+        analyzeSimulatorWriting();
+        showToast('Đã điền bài mẫu chuẩn B1+ cho cả 4 Part!');
+      });
+
+      document.getElementById('btnClearSimulator').addEventListener('click', () => {
+        const clubKey = document.getElementById('simClubSelect').value;
+        loadClubExam(clubKey, false);
+        showToast('Đã xóa trắng để bạn tự luyện viết!');
+      });
+
+      document.getElementById('btnToggleTimer').addEventListener('click', toggleTimer);
+      document.getElementById('btnResetTimer').addEventListener('click', resetTimer);
+
+      document.getElementById('simPart2Input').addEventListener('input', (e) => {
+        updateWordRangeBadge('p2WordBadge', countWords(e.target.value), 20, 30);
+        analyzeSimulatorWriting();
+      });
+
+      document.getElementById('simPart41Input').addEventListener('input', (e) => {
+        updateWordRangeBadge('p41WordBadge', countWords(e.target.value), 40, 50);
+        analyzeSimulatorWriting();
+      });
+
+      document.getElementById('simPart42Input').addEventListener('input', (e) => {
+        updateWordRangeBadge('p42WordBadge', countWords(e.target.value), 120, 150);
+        analyzeSimulatorWriting();
+      });
+
+      document.querySelectorAll('.quick-insert-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const targetId = btn.getAttribute('data-target');
+          const textToInsert = btn.getAttribute('data-insert');
+          const el = document.getElementById(targetId);
+          if (el) {
+            el.value = (el.value ? el.value.trim() + ' ' : '') + textToInsert;
+            el.dispatchEvent(new Event('input'));
+          }
+        });
+      });
+
+      document.getElementById('btnTemplate41').addEventListener('click', () => {
+        const el = document.getElementById('simPart41Input');
+        el.value = document.getElementById('txtCheat41').textContent;
+        el.dispatchEvent(new Event('input'));
+        showToast('Đã chèn khung Email 4.1 Thân mật!');
+      });
+
+      document.getElementById('btnTemplate42').addEventListener('click', () => {
+        const el = document.getElementById('simPart42Input');
+        el.value = document.getElementById('txtCheat42').textContent;
+        el.dispatchEvent(new Event('input'));
+        showToast('Đã chèn khung Email 4.2 Trang trọng!');
+      });
+
+      document.getElementById('btnAnalyzeWriting').addEventListener('click', () => {
+        analyzeSimulatorWriting();
+        showToast('Đã cập nhật kết quả chẩn đoán B1!');
+      });
+
+      ['rngScoreP1', 'rngScoreP2', 'rngScoreP3', 'rngScoreP4', 'chkCoreBoost'].forEach(id => {
+        document.getElementById(id).addEventListener('input', calculateCefrFromSliders);
+        document.getElementById(id).addEventListener('change', calculateCefrFromSliders);
+      });
+
+      // Tab 4 events
+      document.getElementById('btnClearSavedSentences').addEventListener('click', () => {
+        savedSentences = [];
+        saveState();
+        renderSavedSentences();
+        updateHeaderCounters();
+        showToast('Đã xóa danh sách câu đã lưu.');
+      });
+
+      document.getElementById('btnCopyTemplate41').addEventListener('click', () => {
+        copyTextToClipboard(document.getElementById('txtCheat41').textContent);
+      });
+
+      document.getElementById('btnCopyTemplate42').addEventListener('click', () => {
+        copyTextToClipboard(document.getElementById('txtCheat42').textContent);
+      });
+
+      // Initial render
+      renderScenarioButtons();
+      renderBuilderSteps();
+      renderVocabSection();
+      renderQuizQuestion();
+      loadClubExam('travel', true);
+      renderSavedSentences();
+      updateHeaderCounters();
+    });
+  </script>
+</body>
+</html>
